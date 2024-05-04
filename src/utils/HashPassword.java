@@ -27,8 +27,8 @@ public class HashPassword {
 
   public static void main(String[] args) {
 
-    // passLuis por ej
-    System.out.println(convertirSHA256("passLuis"));
+
+    System.out.println(convertirSHA256("passAna"));
   }
 
 }

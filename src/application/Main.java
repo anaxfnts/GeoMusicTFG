@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import firebase.CRUDFirebaseCuentas;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,8 @@ public class Main extends Application {
     primaryStage.getIcons().add(new Image("images/logo.png"));
     primaryStage.setTitle("GeoMusic");
     primaryStage.show();
+    CRUDFirebaseCuentas conexion = new CRUDFirebaseCuentas();
+
 
   }
 

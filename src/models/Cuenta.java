@@ -1,6 +1,7 @@
 package models;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -11,7 +12,7 @@ import javafx.beans.property.StringProperty;
 public class Cuenta extends RecursiveTreeObject<Cuenta> {
 
   private static final long serialVersionUID = 1L;
-  
+
   IntegerProperty idCuenta;
   StringProperty nombre;
   StringProperty usuario;
@@ -20,8 +21,8 @@ public class Cuenta extends RecursiveTreeObject<Cuenta> {
   StringProperty correo;
   StringProperty tipo;
   BooleanProperty es_administrador;
-  
-  
+
+
   public Cuenta(String nombre, String usuario, String contraseña, String ubicacion,
       String correo, String tipo, boolean es_administrador) {
     this.nombre = new SimpleStringProperty(nombre);
@@ -117,9 +118,9 @@ public class Cuenta extends RecursiveTreeObject<Cuenta> {
   public static long getSerialversionuid() {
     return serialVersionUID;
   }
-  
-  
-  
-  
+
+
+
+
 
 }

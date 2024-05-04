@@ -4,6 +4,8 @@ import java.awt.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import firebase.CRUDFirebaseCuentas;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +20,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import utils.HashPassword;
 import models.Cuenta;
+import utils.HashPassword;
 public class LoginController implements Initializable {
 
 
@@ -50,17 +52,23 @@ public class LoginController implements Initializable {
   // Metodo que realiza y comprueba el login de la cuenta
   @FXML
   void logeo(MouseEvent event) throws IOException {
-    String nombre = txtUser.getText();
+
+    String usuario = txtUser.getText();
     String passwd = txtPassword.getText();
     boolean registrado = false;
     String hasPass = HashPassword.convertirSHA256(passwd);
+    String usuarioConsultado = CRUDFirebaseCuentas.consultarUsuario(usuario);
+    String passwdConsultado = CRUDFirebaseCuentas.consultarPasswd(usuario);
+    System.out.println(usuarioConsultado);
+    System.out.println(passwdConsultado);
     System.out.println(hasPass);
     System.out.println(txtPassword.getText());
 
+    /*
+
     try {
       System.out.println(comprobar.toString());
-      if (comprobar.getNombre().equalsIgnoreCase(nombre) && comprobar.getContraseña().equals(hasPass)) {
-
+      if (usuarioConsultado.equalsIgnoreCase(usuario) && passwdConsultado.equals(hasPass)) {
         registrado = true;
 
       }
@@ -69,18 +77,18 @@ public class LoginController implements Initializable {
       // Si no son los datos de la cuenta correctos, muestra una alerta de error
       alertaError();
     }
-
-    if (registrado == true) {
+*/
+    if (registrado) {
       // Si coinciden los datos, inicia la vista principal de la aplicacion
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
-      root = loader.load();
-      // PrincipalController control = loade.getController();
+      AnchorPane root = loader.load();
+      PrincipalController control = loader.getController();
       Scene escena = new Scene(root);
       Stage stage = new Stage();
       stage.setScene(escena);
-      // control.init(stage, this, txtUser.getText(), root, comprobar.getTipo(),
-      // comprobar.getImagenEmpleado());
+      //control.init(stage, this, txtUser.getText(), root, comprobar.getTipo());
       stage.show();
+
       if (this.stage != null) {
         this.stage.close();
       }
@@ -128,8 +136,8 @@ public class LoginController implements Initializable {
   // Inicializa
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    txtUser.setText(" "); // Luis
-    txtPassword.setText(" "); // passLuis
+    txtUser.setText("badfaceana");
+    txtPassword.setText("passAna");
 
   }
 

@@ -1,5 +1,11 @@
 package views;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +21,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class CrearCuentaController implements Initializable {
 
@@ -51,7 +51,7 @@ public class CrearCuentaController implements Initializable {
 
     @FXML
     private TextField txtUser;
-    
+
      void agregarProvincias() {
       // Lista de provincias de España
       List<String> provincias = new ArrayList<>();
@@ -111,24 +111,23 @@ public class CrearCuentaController implements Initializable {
       // Agregar todas las provincias al ComboBox
       ubicacion.getItems().addAll(provincias);
   }
-    
-     
+
+
      @FXML
      void crearCuenta(MouseEvent event) throws IOException {
+       //Hacer consulta que compruebe que en documento el nombre sea unico para usuario
        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
        AnchorPane root = loader.load();
        Scene escena = new Scene(root);
        Stage stage = new Stage();
        stage.setScene(escena);
-       stage.setMaximized(true);
-       stage.getIcons().add(new Image("images/logo.png"));
        stage.show();
        if (this.stage != null) {
          this.stage.close();
        }
      }
-     
-     
+
+
      @FXML
      void atras(MouseEvent event) throws IOException {
        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PreviaView.fxml"));
@@ -143,7 +142,7 @@ public class CrearCuentaController implements Initializable {
          this.stage.close();
        }
      }
-     
+
      // Metodo para salir de la aplicacion
      @FXML
      void salir(MouseEvent event) {

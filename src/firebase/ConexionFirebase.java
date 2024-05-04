@@ -10,21 +10,27 @@ import com.google.firebase.cloud.FirestoreClient;
 
 public class ConexionFirebase {
 
-  public Firestore iniciarFirebase() {
-    try {
+    public Firestore iniciarFirebase() {
+        try {
+            // Cargar el archivo de configuración desde el classpath
+            GoogleCredentials credentials = GoogleCredentials.fromStream(
+                    getClass().getClassLoader().getResourceAsStream("firebase/geomusic-95f90-firebase-adminsdk-66j1w-5a398500e4.json"));
 
-      FirebaseOptions options;
-      options = new FirebaseOptions.Builder()
-          .setCredentials(GoogleCredentials
-              .fromStream(getClass().getResourceAsStream("geomusic-95f90-firebase-adminsdk-66j1w-5a398500e4.json")))
-          .setDatabaseUrl("https://geomusic-95f90-default-rtdb.europe-west1.firebasedatabase.app/").build();
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setCredentials(credentials)
+                    .setDatabaseUrl("https://geomusic-95f90.firebaseio.com/")
+                    .build();
 
-      FirebaseApp.initializeApp(options);
+            FirebaseApp.initializeApp(options);
 
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+            System.out.println("Firebase iniciada correctamente");
+
+        } catch (IOException e) {
+            // Manejar la excepción de manera significativa para tu aplicación
+            System.err.println("Error al inicializar Firebase: " + e.getMessage());
+        }
+
+        // Retornar Firestore solo después de que Firebase esté completamente inicializado
+        return FirestoreClient.getFirestore();
     }
-    return FirestoreClient.getFirestore();
-  }
 }
