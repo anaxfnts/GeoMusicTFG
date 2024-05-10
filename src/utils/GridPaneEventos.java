@@ -12,7 +12,11 @@ import models.Evento;
 import views.EventoController;
 
 public class GridPaneEventos {
+<<<<<<< HEAD
 
+=======
+//
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
   public GridPane crearGridPane(int columna, int fila, List<AnchorPane> paneles) {
 
     GridPane nuevo = new GridPane();
@@ -36,9 +40,17 @@ public class GridPaneEventos {
       AnchorPane root = loader.load();
       EventoController controlador = loader.getController();
 
+<<<<<<< HEAD
       // Enviamos los datos de cada evento al controlador de eventos
       controlador.setDatos(eventosList.get(i));
 
+=======
+      // Enviamos los datos de cada vehiculo al controlador de vehiculos
+      controlador.setDatos(eventosList.get(i));
+
+      // Añadimos cada panel a una lista de de AnchorPane en nuestro caso siempre de
+      // root que hayamos escogido
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
       paneles.add(root);
     }
     return paneles;

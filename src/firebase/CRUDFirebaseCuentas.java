@@ -21,7 +21,11 @@ public class CRUDFirebaseCuentas {
     bd = conexionFirebase.iniciarFirebase();
   }
 
+<<<<<<< HEAD
   public static boolean addFirebaseCuenta(Cuenta cuenta) {
+=======
+  public boolean addFirebaseCuenta(Cuenta cuenta) {
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
     boolean key = false;
     Map<String, Object> docCuenta = new HashMap<>();
     docCuenta.put("idCuenta", cuenta.getIdCuenta());
@@ -46,17 +50,21 @@ public class CRUDFirebaseCuentas {
   }
 
   public static String consultarUsuario(String usuario) {
+<<<<<<< HEAD
     // Validar que usuario no sea ni nulo ni vacío
     if (usuario == null || usuario.isEmpty()) {
       System.out.println("El nombre de usuario es nulo o vacío.");
       return ""; // O puedes lanzar una excepción aquí si lo prefieres
     }
 
+=======
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
     DocumentReference docRef = bd.collection("Cuentas").document(usuario);
     ApiFuture<DocumentSnapshot> future = docRef.get();
     DocumentSnapshot document;
     String usuarioConsultado = "";
     try {
+<<<<<<< HEAD
       document = future.get();
       if (document.exists()) {
         // El documento existe, ahora puedes acceder al campo "usuario"
@@ -81,10 +89,36 @@ public class CRUDFirebaseCuentas {
     }
 
     DocumentReference docRef = bd.collection("Cuentas").document(usuario);
+=======
+        document = future.get();
+        if (document.exists()) {
+            // Obtener el valor del campo "usuario"
+            Object usuarioObject = document.get("usuario");
+            if (usuarioObject != null) {
+                // Convertir el valor a String
+                usuarioConsultado = usuarioObject.toString();
+                System.out.println("Usuario encontrado: " + usuarioConsultado);
+            } else {
+                System.out.println("Usuario no encontrado");
+            }
+        } else {
+            System.out.println("Documento no encontrado");
+        }
+    } catch (InterruptedException | ExecutionException e) {
+        e.printStackTrace();
+    }
+    return usuarioConsultado;
+}
+
+
+  public static String consultarPasswd(String passwd) {
+    DocumentReference docRef = bd.collection("Cuentas").document(passwd);
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
     ApiFuture<DocumentSnapshot> future = docRef.get();
     DocumentSnapshot document;
     String passwdConsultado = "";
     try {
+<<<<<<< HEAD
       document = future.get();
       if (document.exists()) {
         // El documento existe, ahora puedes acceder al campo "contraseña"
@@ -143,5 +177,26 @@ public class CRUDFirebaseCuentas {
     return cuenta;
 
   }
+=======
+        document = future.get();
+        if (document.exists()) {
+            // Obtener el valor del campo "contraseña"
+            Object passwdObject = document.get("contraseña");
+            if (passwdObject != null) {
+                // Convertir el valor a String
+                passwdConsultado = passwdObject.toString();
+                System.out.println("Contraseña encontrada: " + passwdConsultado);
+            } else {
+                System.out.println("Contraseña no encontrada");
+            }
+        } else {
+            System.out.println("Documento no encontrado");
+        }
+    } catch (InterruptedException | ExecutionException e) {
+        e.printStackTrace();
+    }
+    return passwdConsultado;
+}
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
 
 }

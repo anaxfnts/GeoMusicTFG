@@ -16,11 +16,22 @@ public class EventosController {
   @FXML
   void vistaEventos(MouseEvent event) throws IOException {
     vistaVerEventos();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
   }
 
   private void vistaVerEventos() throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
     AnchorPane root = loader.load();
     LoginController.root.setCenter(root);
+<<<<<<< HEAD
   }
+=======
+
+  }
+
+
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
 }

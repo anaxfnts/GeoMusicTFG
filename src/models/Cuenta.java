@@ -11,7 +11,11 @@ public class Cuenta extends RecursiveTreeObject<Cuenta> {
 
   private static final long serialVersionUID = 1L;
 
+<<<<<<< HEAD
   StringProperty idCuenta;
+=======
+  IntegerProperty idCuenta;
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
   StringProperty nombre;
   StringProperty usuario;
   StringProperty contraseña;
@@ -20,9 +24,15 @@ public class Cuenta extends RecursiveTreeObject<Cuenta> {
   StringProperty tipo;
   BooleanProperty es_administrador;
 
+<<<<<<< HEAD
   public Cuenta(String idCuenta, String nombre, String usuario, String contraseña, String ubicacion, String correo,
       String tipo, boolean es_administrador) {
     this.idCuenta = new SimpleStringProperty(idCuenta);
+=======
+
+  public Cuenta(String nombre, String usuario, String contraseña, String ubicacion,
+      String correo, String tipo, boolean es_administrador) {
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
     this.nombre = new SimpleStringProperty(nombre);
     this.usuario = new SimpleStringProperty(usuario);
     this.contraseña = new SimpleStringProperty(contraseña);
@@ -109,10 +119,16 @@ public class Cuenta extends RecursiveTreeObject<Cuenta> {
     return serialVersionUID;
   }
 
+<<<<<<< HEAD
   @Override
   public String toString() {
     return "Cuenta [nombre=" + nombre + ", usuario=" + usuario + ", contraseña=" + contraseña + ", ubicacion="
         + ubicacion + ", correo=" + correo + ", tipo=" + tipo + "]";
   }
+=======
+
+
+
+>>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
 
 }
