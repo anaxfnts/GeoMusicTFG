@@ -4,43 +4,44 @@ import java.awt.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+import firebase.CRUDFirebaseCuentas;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import utils.HashPassword;
 import models.Cuenta;
-public class LoginController implements Initializable {
+import utils.HashPassword;
 
+public class LoginController implements Initializable {
 
   public static BorderPane root;
   private Stage stage;
 
   // Todos los elementos del Login
   @FXML
-  private Button btnCancel;
+  private JFXButton btnCancel;
 
   @FXML
-  private Button btnLogin;
+  private JFXButton btnLogin;
 
   @FXML
-  private Button btnAtras;
+  private JFXButton btnAtras;
 
   @FXML
-  private PasswordField txtPassword;
+  private JFXPasswordField txtPassword;
 
   @FXML
-  private TextField txtUser;
+  private JFXTextField txtUser;
 
   @FXML
   private Label txtTipo;
@@ -49,42 +50,45 @@ public class LoginController implements Initializable {
 
   // Metodo que realiza y comprueba el login de la cuenta
   @FXML
-  void logeo(MouseEvent event) throws IOException {
-    String nombre = txtUser.getText();
+  void logeo(MouseEvent event) throws IOException, Exception {
+
+    String usuario = txtUser.getText();
     String passwd = txtPassword.getText();
-    boolean registrado = false;
+    boolean registrado;
     String hasPass = HashPassword.convertirSHA256(passwd);
-    System.out.println(hasPass);
-    System.out.println(txtPassword.getText());
+    String usuarioConsultado = CRUDFirebaseCuentas.consultarUsuario(usuario);
+    String passwdConsultado = CRUDFirebaseCuentas.consultarPasswd(usuario);
 
     try {
-      System.out.println(comprobar.toString());
-      if (comprobar.getNombre().equalsIgnoreCase(nombre) && comprobar.getContraseña().equals(hasPass)) {
-
+      if (usuarioConsultado.equalsIgnoreCase(usuario) && passwdConsultado.equalsIgnoreCase(hasPass)) {
         registrado = true;
+        comprobar = CRUDFirebaseCuentas.obtenerDatosCuenta(usuario);
+        // Si coinciden los datos, inicia la vista principal de la aplicacion
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
+        root = loader.load();
+        PrincipalController control = loader.getController();
+        Scene escena = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(escena);
+        control.init(stage, this, comprobar.getNombre(), root, comprobar.getTipo(), comprobar.getUbicacion());
+        stage.show();
 
+        if (this.stage != null) {
+          this.stage.close();
+        }
+
+      } else if (usuario.isEmpty() || passwd.isEmpty()) {
+        registrado = false;
+        alertaVacio();
+
+      } else {
+        registrado = false;
+        alertaError();
       }
 
+      // Mirar aquí
     } catch (NullPointerException e) {
-      // Si no son los datos de la cuenta correctos, muestra una alerta de error
       alertaError();
-    }
-
-    if (registrado == true) {
-      // Si coinciden los datos, inicia la vista principal de la aplicacion
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
-      root = loader.load();
-      // PrincipalController control = loade.getController();
-      Scene escena = new Scene(root);
-      Stage stage = new Stage();
-      stage.setScene(escena);
-      // control.init(stage, this, txtUser.getText(), root, comprobar.getTipo(),
-      // comprobar.getImagenEmpleado());
-      stage.show();
-      if (this.stage != null) {
-        this.stage.close();
-      }
-
     }
 
   }
@@ -115,7 +119,25 @@ public class LoginController implements Initializable {
   public static void alertaError() {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
-    alert.setContentText("Usuario incorrecto");
+    alert.setContentText("Usuario no existe: comprueba tu usuario y tu contraseña.");
+    alert.showAndWait();
+
+  }
+
+//Metodo que muestra la alerta de error
+  public static void alertaFalloApp() {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setContentText("App no disponible");
+    alert.showAndWait();
+
+  }
+
+//Metodo que muestra la alerta de null
+  public static void alertaVacio() {
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Error");
+    alert.setContentText("Campos vacíos");
     alert.showAndWait();
 
   }
@@ -128,8 +150,6 @@ public class LoginController implements Initializable {
   // Inicializa
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    txtUser.setText(" "); // Luis
-    txtPassword.setText(" "); // passLuis
 
   }
 

@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import com.jfoenix.controls.JFXButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -24,14 +24,14 @@ public class PreviaController {
 
   // Todos los elementos de la primera pantalla
   @FXML
-  private Button btnCancel;
+  private JFXButton btnCancel;
 
   @FXML
-  private Button btnLogin;
+  private JFXButton btnLogin;
 
   @FXML
-  private Button btnCrearCuenta;
-  
+  private JFXButton btnCrearCuenta;
+
   @FXML
   private ImageView facebook;
 
@@ -40,7 +40,6 @@ public class PreviaController {
 
   @FXML
   private ImageView twitter;
-
 
   @FXML
   void logeo(MouseEvent event) throws IOException {

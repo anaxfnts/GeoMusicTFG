@@ -57,6 +57,26 @@
 			<artifactId>jfoenix</artifactId>
 			<version>8.0.10</version>
 		</dependency>
+		
+		<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>1.7.32</version> <!-- O la versión más reciente -->
+</dependency>
+
+<dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.2.6</version> <!-- O la versión más reciente -->
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+<dependency>
+    <groupId>com.google.protobuf</groupId>
+    <artifactId>protobuf-java</artifactId>
+    <version>3.23.2</version>
+</dependency>
+
 
 
 	</dependencies>

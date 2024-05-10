@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -19,26 +20,52 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1038.0" prefWidth="1888.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.PrincipalController">
-   <children>
-      <Pane layoutX="442.0" layoutY="118.0" prefHeight="524.0" prefWidth="512.0" style="-fx-background-color: black; -fx-background-radius: 40;">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0" prefWidth="1418.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.PrincipalController">
+   <top>
+      <Pane prefHeight="236.0" prefWidth="1333.0" style="-fx-background-color: black; -fx-border-insets: 12;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="98.0" layoutY="240.0" prefHeight="74.0" prefWidth="316.0" text="Próximamente" textFill="WHITE">
+            <Pane cacheShape="false" layoutX="1.0" prefHeight="129.0" prefWidth="1284.0" style="-fx-background-color: black;">
+               <children>
+                  <Label layoutX="52.0" layoutY="30.0" text="Conciertos próximos" textFill="#d886ff">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblNombre" alignment="CENTER_RIGHT" layoutX="788.0" layoutY="56.0" prefHeight="35.0" prefWidth="262.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTipoCuenta" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="900.0" layoutY="30.0" prefHeight="26.0" prefWidth="150.0" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="17.0" />
+                     </font>
+                  </Label>
+                  <Circle fx:id="circulo" fill="WHITE" layoutX="1111.0" layoutY="63.0" radius="45.0" stroke="BLACK" strokeType="INSIDE" />
+                  <ImageView fx:id="img" fitHeight="59.0" fitWidth="59.0" layoutX="1082.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profile.jpg" />
+                     </image>
+                  </ImageView>
+                  <JFXButton fx:id="btnVerCuenta" layoutX="1167.0" layoutY="20.0" prefHeight="34.0" prefWidth="105.0" style="-fx-background-color: D886FF; -fx-background-radius: 40;" text="Ver cuenta">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSalir" layoutX="1168.0" layoutY="69.0" onMouseClicked="#salir" prefHeight="32.0" prefWidth="103.0" style="-fx-background-color: white; -fx-background-radius: 40;" text="Salir">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <Label layoutX="53.0" layoutY="135.0" prefHeight="28.0" prefWidth="110.0" text="Ubicación:" textFill="#d886ff">
                <font>
-                  <Font name="System Bold Italic" size="45.0" />
+                  <Font name="System Italic" size="19.0" />
                </font>
             </Label>
+            <JFXComboBox id="ubicacion" fx:id="ubicacion" focusColor="#fcfcfc" layoutX="53.0" layoutY="173.0" prefHeight="25.0" prefWidth="152.0" promptText="Elige ubicación" style="-fx-background-color: black; -fx-border-color: D886FF;" styleClass="ubicacion" stylesheets="@../application/application.css" unFocusColor="BLACK" />
          </children>
       </Pane>
-      <JFXButton fx:id="btnAtras" layoutX="66.0" layoutY="58.0" onMouseClicked="#atras" prefHeight="119.0" prefWidth="126.0" text="←" textFill="#d886ff">
-         <font>
-            <Font size="55.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="btnCancel" layoutX="1385.0" layoutY="749.0" onMouseClicked="#salir" prefHeight="32.0" prefWidth="89.0" style="-fx-background-color: white; -fx-background-radius: 40;" text="Salir">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </JFXButton>
-   </children>
-</AnchorPane>
+   </top>
+</BorderPane>

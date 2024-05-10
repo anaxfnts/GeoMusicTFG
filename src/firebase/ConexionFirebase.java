@@ -9,22 +9,38 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
 public class ConexionFirebase {
+  private static Firestore firestore;
 
-  public Firestore iniciarFirebase() {
+  public static Firestore iniciarFirebase() {
     try {
+      // Cargar el archivo de configuración desde el classpath
+      GoogleCredentials credentials = GoogleCredentials.fromStream(ConexionFirebase.class.getClassLoader()
+          .getResourceAsStream("firebase/geomusic-95f90-firebase-adminsdk-66j1w-5a398500e4.json"));
 
-      FirebaseOptions options;
-      options = new FirebaseOptions.Builder()
-          .setCredentials(GoogleCredentials
-              .fromStream(getClass().getResourceAsStream("geomusic-95f90-firebase-adminsdk-66j1w-5a398500e4.json")))
-          .setDatabaseUrl("https://geomusic-95f90-default-rtdb.europe-west1.firebasedatabase.app/").build();
+      FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(credentials)
+          .setDatabaseUrl("https://geomusic-95f90.firebaseio.com/").build();
 
       FirebaseApp.initializeApp(options);
 
+      System.out.println("Firebase iniciada correctamente");
+
+      // Inicializar Firestore solo después de que Firebase esté completamente
+      // inicializado
+      firestore = FirestoreClient.getFirestore();
+
     } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+      // Manejar la excepción de manera significativa para tu aplicación
+      System.err.println("Error al inicializar Firebase: " + e.getMessage());
     }
-    return FirestoreClient.getFirestore();
+
+    return firestore;
+  }
+
+  public static Firestore getFirestore() {
+    if (firestore == null) {
+      // Si la instancia de Firestore aún no está inicializada, inicialízala
+      firestore = iniciarFirebase();
+    }
+    return firestore;
   }
 }
