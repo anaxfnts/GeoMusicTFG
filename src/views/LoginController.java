@@ -4,14 +4,10 @@ import java.awt.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-<<<<<<< HEAD
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-=======
-
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
-import firebase.CRUDFirebaseCuentas;
+import firebase.CRUDFirebase;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,15 +21,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import models.Cuenta;
 import utils.HashPassword;
-<<<<<<< HEAD
-=======
-public class LoginController implements Initializable {
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
 
 public class LoginController implements Initializable {
 
   public static BorderPane root;
   private Stage stage;
+  private String ubicacionSeleccionada;
 
   // Todos los elementos del Login
   @FXML
@@ -58,37 +51,19 @@ public class LoginController implements Initializable {
 
   // Metodo que realiza y comprueba el login de la cuenta
   @FXML
-<<<<<<< HEAD
   void logeo(MouseEvent event) throws IOException, Exception {
-=======
-  void logeo(MouseEvent event) throws IOException {
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
 
     String usuario = txtUser.getText();
     String passwd = txtPassword.getText();
     boolean registrado;
     String hasPass = HashPassword.convertirSHA256(passwd);
-    String usuarioConsultado = CRUDFirebaseCuentas.consultarUsuario(usuario);
-    String passwdConsultado = CRUDFirebaseCuentas.consultarPasswd(usuario);
-<<<<<<< HEAD
-=======
-    System.out.println(usuarioConsultado);
-    System.out.println(passwdConsultado);
-    System.out.println(hasPass);
-    System.out.println(txtPassword.getText());
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
-
-    /*
+    String usuarioConsultado = CRUDFirebase.consultarUsuario(usuario);
+    String passwdConsultado = CRUDFirebase.consultarPasswd(usuario);
 
     try {
-<<<<<<< HEAD
       if (usuarioConsultado.equalsIgnoreCase(usuario) && passwdConsultado.equalsIgnoreCase(hasPass)) {
-=======
-      System.out.println(comprobar.toString());
-      if (usuarioConsultado.equalsIgnoreCase(usuario) && passwdConsultado.equals(hasPass)) {
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
         registrado = true;
-        comprobar = CRUDFirebaseCuentas.obtenerDatosCuenta(usuario);
+        comprobar = CRUDFirebase.obtenerDatosCuenta(usuario);
         // Si coinciden los datos, inicia la vista principal de la aplicacion
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
         root = loader.load();
@@ -96,7 +71,7 @@ public class LoginController implements Initializable {
         Scene escena = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(escena);
-        control.init(stage, this, comprobar.getNombre(), root, comprobar.getTipo(), comprobar.getUbicacion());
+        control.init(stage, this, comprobar.getNombre(), root, comprobar.getTipo());
         stage.show();
 
         if (this.stage != null) {
@@ -116,26 +91,6 @@ public class LoginController implements Initializable {
     } catch (NullPointerException e) {
       alertaError();
     }
-<<<<<<< HEAD
-=======
-*/
-    if (registrado) {
-      // Si coinciden los datos, inicia la vista principal de la aplicacion
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
-      AnchorPane root = loader.load();
-      PrincipalController control = loader.getController();
-      Scene escena = new Scene(root);
-      Stage stage = new Stage();
-      stage.setScene(escena);
-      //control.init(stage, this, txtUser.getText(), root, comprobar.getTipo());
-      stage.show();
-
-      if (this.stage != null) {
-        this.stage.close();
-      }
-
-    }
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
 
   }
 
@@ -187,6 +142,11 @@ public class LoginController implements Initializable {
     alert.showAndWait();
 
   }
+  
+  public static String mostrarUbicacionPredeteminada() {
+    String ubicacionPredeterminada = CRUDFirebase.consultarUbicacion(comprobar.getUsuario());
+    return ubicacionPredeterminada;
+  }
 
   public void setStage(Stage primaryStage) {
     stage = primaryStage;
@@ -196,11 +156,6 @@ public class LoginController implements Initializable {
   // Inicializa
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-<<<<<<< HEAD
-=======
-    txtUser.setText("badfaceana");
-    txtPassword.setText("passAna");
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
 
   }
 

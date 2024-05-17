@@ -5,11 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-<<<<<<< HEAD
 import com.jfoenix.controls.JFXButton;
-=======
-
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,11 +30,7 @@ public class PreviaController {
   private JFXButton btnLogin;
 
   @FXML
-<<<<<<< HEAD
   private JFXButton btnCrearCuenta;
-=======
-  private Button btnCrearCuenta;
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
 
   @FXML
   private ImageView facebook;

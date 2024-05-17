@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -18,22 +19,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="1346.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.VerEventosController">
    <children>
-<<<<<<< HEAD
-      <ScrollPane layoutX="35.0" layoutY="35.0" prefHeight="436.0" prefWidth="1262.0" style="-fx-background-color: black; -fx-border-color: black;">
+      <ScrollPane layoutX="33.0" layoutY="58.0" prefHeight="435.0" prefWidth="1262.0" style="-fx-background-color: black; -fx-border-color: black;">
          <content>
-            <AnchorPane prefHeight="430.0" prefWidth="1232.0" style="-fx-background-color: black;">
+            <AnchorPane prefHeight="430.0" prefWidth="1244.0" style="-fx-background-color: black;">
                <children>
-                  <BorderPane fx:id="borderPaneEventos" layoutX="1.0" layoutY="-9.0" prefHeight="425.0" prefWidth="1263.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-31.0" AnchorPane.topAnchor="0.0" />
-=======
-      <ScrollPane layoutX="69.0" layoutY="35.0" prefHeight="436.0" prefWidth="1209.0" style="-fx-background-color: black; -fx-border-color: black;">
-         <content>
-            <AnchorPane prefHeight="430.0" prefWidth="1204.0" style="-fx-background-color: black;">
-               <children>
-                  <BorderPane fx:id="borderPaneEventos" layoutX="1.0" layoutY="-9.0" prefHeight="424.0" prefWidth="979.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
+                  <BorderPane fx:id="borderPaneEventos" layoutX="-16.0" layoutY="-9.0" prefHeight="425.0" prefWidth="1262.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="-16.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
+      <JFXComboBox id="ubicacion" fx:id="ubicacion" focusColor="#fcfcfc" layoutX="6.0" layoutY="8.0" prefHeight="25.0" prefWidth="152.0" promptText="Elige ubicación" style="-fx-background-color: black; -fx-border-color: D886FF;" styleClass="ubicacion" stylesheets="@../application/application.css" unFocusColor="BLACK" />
    </children>
 </AnchorPane>

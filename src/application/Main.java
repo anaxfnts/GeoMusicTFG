@@ -2,11 +2,7 @@ package application;
 
 import java.io.IOException;
 
-import firebase.CRUDFirebaseCuentas;
-<<<<<<< HEAD
-import firebase.CRUDFirebaseEventos;
-=======
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
+import firebase.CRUDFirebase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,12 +26,7 @@ public class Main extends Application {
     primaryStage.getIcons().add(new Image("images/logo.png"));
     primaryStage.setTitle("GeoMusic");
     primaryStage.show();
-    CRUDFirebaseCuentas conexion = new CRUDFirebaseCuentas();
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
+    CRUDFirebase conexion = new CRUDFirebase();
   }
 
   // Ejecuta la función que carga la vista

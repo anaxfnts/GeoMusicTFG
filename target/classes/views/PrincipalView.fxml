@@ -20,7 +20,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0" prefWidth="1418.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.PrincipalController">
    <top>
       <Pane prefHeight="236.0" prefWidth="1333.0" style="-fx-background-color: black; -fx-border-insets: 12;" BorderPane.alignment="CENTER">
@@ -49,77 +48,23 @@
                      </image>
                   </ImageView>
                   <JFXButton fx:id="btnVerCuenta" layoutX="1167.0" layoutY="20.0" prefHeight="34.0" prefWidth="105.0" style="-fx-background-color: D886FF; -fx-background-radius: 40;" text="Ver cuenta">
-=======
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="999.0" prefWidth="1761.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.PrincipalController">
-   <children>
-      <BorderPane layoutX="189.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0" prefWidth="1418.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="189.0" AnchorPane.rightAnchor="154.0" AnchorPane.topAnchor="150.0">
-         <top>
-            <Pane prefHeight="236.0" prefWidth="1333.0" style="-fx-background-color: black; -fx-border-insets: 12;" BorderPane.alignment="CENTER">
-               <children>
-                  <Pane cacheShape="false" layoutX="1.0" prefHeight="129.0" prefWidth="1276.0" style="-fx-background-color: black;">
-                     <children>
-                        <Label layoutX="52.0" layoutY="30.0" text="Conciertos próximos" textFill="#d886ff">
-                           <font>
-                              <Font name="System Bold" size="48.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblNombre" alignment="CENTER_RIGHT" layoutX="844.0" layoutY="64.0" prefHeight="35.0" prefWidth="262.0" textFill="WHITE">
-                           <font>
-                              <Font name="System Italic" size="26.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblTipoCuenta" layoutX="931.0" layoutY="17.0" prefHeight="25.0" prefWidth="175.0" textFill="WHITE">
-                           <font>
-                              <Font name="System Italic" size="17.0" />
-                           </font>
-                        </Label>
-                        <Circle fx:id="circulo" fill="WHITE" layoutX="1185.0" layoutY="63.0" radius="45.0" stroke="BLACK" strokeType="INSIDE" />
-                        <ImageView fx:id="img" fitHeight="62.0" fitWidth="62.0" layoutX="1155.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/profile.jpg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Label layoutX="53.0" layoutY="135.0" prefHeight="28.0" prefWidth="110.0" text="Ubicación:" textFill="#d886ff">
-                     <font>
-                        <Font name="System Italic" size="19.0" />
-                     </font>
-                  </Label>
-                  <JFXComboBox fx:id="ubicacion" focusColor="#fcfcfc" layoutX="53.0" layoutY="173.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-color: black; -fx-border-color: D886FF;" />
-                  <JFXButton fx:id="btnSalir" layoutX="1178.0" layoutY="182.0" onMouseClicked="#salir" prefHeight="32.0" prefWidth="89.0" style="-fx-background-color: white; -fx-background-radius: 40;" text="Salir">
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXButton>
-<<<<<<< HEAD
                   <JFXButton fx:id="btnSalir" layoutX="1168.0" layoutY="69.0" onMouseClicked="#salir" prefHeight="32.0" prefWidth="103.0" style="-fx-background-color: white; -fx-background-radius: 40;" text="Salir">
                      <font>
                         <Font name="System Bold" size="13.0" />
-=======
-                  <JFXButton fx:id="btnVerCuenta" layoutX="968.0" layoutY="127.0" prefHeight="45.0" prefWidth="144.0" style="-fx-background-color: black; -fx-background-radius: 40;" text="Ver cuenta" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="21.0" />
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
                      </font>
                   </JFXButton>
                </children>
             </Pane>
-<<<<<<< HEAD
-            <Label layoutX="53.0" layoutY="135.0" prefHeight="28.0" prefWidth="110.0" text="Ubicación:" textFill="#d886ff">
+            <Label layoutX="53.0" layoutY="184.0" prefHeight="28.0" prefWidth="110.0" text="Ubicación:" textFill="#d886ff">
                <font>
                   <Font name="System Italic" size="19.0" />
                </font>
             </Label>
-            <JFXComboBox id="ubicacion" fx:id="ubicacion" focusColor="#fcfcfc" layoutX="53.0" layoutY="173.0" prefHeight="25.0" prefWidth="152.0" promptText="Elige ubicación" style="-fx-background-color: black; -fx-border-color: D886FF;" styleClass="ubicacion" stylesheets="@../application/application.css" unFocusColor="BLACK" />
          </children>
       </Pane>
    </top>
 </BorderPane>
-=======
-         </top>
-      </BorderPane>
-   </children>
-</AnchorPane>
->>>>>>> 68346f61d30bef8c28dd4ee2bd863c2173f2191e
