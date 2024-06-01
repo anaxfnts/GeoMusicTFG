@@ -1,17 +1,11 @@
 package views;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-
-import firebase.CRUDFirebase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -25,57 +19,72 @@ import models.Evento;
 
 public class PrincipalController {
 
+  // Referencia al escenario principal.
   private Stage stage;
+
+  // Panel principal de la interfaz.
   private BorderPane borderPane;
+
+  // Controlador del login.
   @SuppressWarnings("unused")
   private LoginController controLogin;
-  private CrearCuentaController crearCuenta;
-  private List<Evento> eventos;
-  
 
-  // Todos los elementos
+  // Controlador de la creación de cuenta.
+  @SuppressWarnings("unused")
+  private CrearCuentaController crearCuenta;
+
+  // Lista de eventos.
+  @SuppressWarnings("unused")
+  private List<Evento> eventos;
+
+  // Etiqueta para mostrar el nombre del usuario.
   @FXML
   private Label lblNombre;
 
+  // Etiqueta para mostrar el tipo de cuenta del usuario.
   @FXML
   private Label lblTipoCuenta;
 
+  // Círculo para la imagen de perfil.
   @FXML
   private Circle circulo;
 
+  // Imagen que para mostrar una imagen.
   @FXML
   private ImageView img;
 
+  // Botón para salir de la aplicación.
   @FXML
   private JFXButton btnSalir;
 
+  // ComboBox para seleccionar la ubicación.
   @FXML
   private JFXComboBox<String> ubicacion;
 
+  // Botón para ver la cuenta del usuario.
   @FXML
   private JFXButton btnVerCuenta;
 
-  // Setea los datos necesarios y las imagenes
-  void init(Stage stage, LoginController loginController, String nombre, BorderPane border, String tipoCuenta) throws IOException {
-    // Cargar la vista principal
+  // Método para inicializar la interfaz con el controlador de login.
+  void init(Stage stage, LoginController loginController, String nombre, BorderPane border, String tipoCuenta)
+      throws IOException {
     this.stage = stage;
     this.controLogin = loginController;
     lblNombre.setText(nombre);
     lblTipoCuenta.setText(tipoCuenta);
     this.borderPane = border;
-   
+
     stage.setMaximized(true);
     stage.getIcons().add(new Image("images/logo.PNG"));
     stage.setTitle("GeoMusic");
 
     stage.show();
     escenaEventos();
-
   }
 
-  // Setea los datos necesarios y las imagenes
-  void init(Stage stage, CrearCuentaController crearController, String nombre, BorderPane border, String tipoCuenta) throws IOException {
-    // Cargar la vista principal
+  // Método para inicializar la interfaz con el controlador de creación de cuenta.
+  void init(Stage stage, CrearCuentaController crearController, String nombre, BorderPane border, String tipoCuenta)
+      throws IOException {
     this.stage = stage;
     this.crearCuenta = crearController;
     lblNombre.setText(nombre);
@@ -88,30 +97,31 @@ public class PrincipalController {
 
     stage.show();
     escenaEventos();
-
   }
 
+  // Método para cargar y mostrar la escena de eventos.
   public void escenaEventos() throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VerEventos.fxml"));
     AnchorPane root = loader.load();
     VerEventosController verEventosController = loader.getController();
 
     borderPane.setCenter(root);
-}
+  }
+
+  // Maneja el evento de clic para ver eventos.
   @FXML
   void vistaEventos(MouseEvent event) throws IOException {
     escenaEventos();
     borderPane.setLeft(null);
   }
 
+  // Maneja el evento de clic para salir de la aplicación.
   @FXML
   void salir(MouseEvent event) throws IOException {
     escenaLogin();
   }
 
-  
-
-  // Metodo que cierra sesion y vuelve a mostrar el Login
+  // Método que cierra sesión y vuelve a mostrar el login.
   private void escenaLogin() throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PreviaView.fxml"));
     AnchorPane root = loader.load();
@@ -125,11 +135,40 @@ public class PrincipalController {
       this.stage.close();
     }
   }
-
   
+  @FXML
+  void verCuenta(MouseEvent event) throws IOException {
+    escenaVerCuenta();
+  }
+  // Método que muestra la información de la cuenta. 
+  private void escenaVerCuenta() throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VerCuentaView.fxml"));
+    AnchorPane root = loader.load();
+    Scene escena = new Scene(root);
+    Stage stage = new Stage();
+    stage.setScene(escena);
+    stage.setMaximized(true);
+    stage.getIcons().add(new Image("images/logo.png"));
+    stage.show();
+    if (this.stage != null) {
+      this.stage.close();
+    }
+  }
+  
+  public void cargarVistaCuenta() throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VerCuenta.fxml"));
+    AnchorPane root = loader.load();
+    borderPane.setCenter(root);
+}
 
+public void cargarVistaEventos() throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VerEventos.fxml"));
+    AnchorPane root = loader.load();
+    borderPane.setCenter(root);
+}
+
+  // Establece la lista de eventos.
   public void setEventos(List<Evento> listaEventos) {
     this.eventos = listaEventos;
-
   }
 }

@@ -5,9 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import com.jfoenix.controls.JFXComboBox;
-
 import firebase.CRUDFirebase;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,59 +18,77 @@ import models.Evento;
 import utils.GridPaneEventos;
 
 public class VerEventosController implements Initializable {
+
+  // GridPaneEventos es una clase personalizada para manejar la disposición de
+  // eventos en una cuadrícula.
   private GridPaneEventos grid = new GridPaneEventos();
+
+  // Listas estáticas para almacenar eventos y paneles de anclaje.
   private static List<Evento> listaEventos = new ArrayList<>();
   private static List<AnchorPane> paneles = new ArrayList<>();
+
+  // GridPane para organizar los paneles de eventos.
   private GridPane nuevoGrid;
-  private String ubicacionSeleccionada;
+
+  // Cadena para almacenar la ubicación predeterminada.
   private String ubicacionPredeterminada;
 
-
+  // FXML variables que representan componentes en la interfaz gráfica.
   @FXML
   private BorderPane borderPaneEventos;
-  
+
   @FXML
   private JFXComboBox<String> ubicacion;
 
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-      int fila = 0;
-      int columna = 0;
+    int fila = 0;
+    int columna = 0;
 
-      ubicacion.valueProperty().addListener(new ChangeListener<String>() {
-          @Override
-          public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-              try {
-                  actualizarSegunUbicacion(newValue);
-              } catch (IOException e) {
-                  e.printStackTrace();
-              }
-          }
-      });
-      
-      // Agregar todas las provincias al ComboBox cuando se despliegue
-      ubicacion.showingProperty().addListener((obs, oldValue, newValue) -> {
-          if (newValue) {
-              // Cuando se muestra el ComboBox, agregar todas las provincias
-              agregarProvincias();
-          }
-      });
-
-      try {
-          ubicacionPredeterminada = LoginController.mostrarUbicacionPredeteminada();
-          ubicacion.setValue(ubicacionPredeterminada);
-          listaEventos = CRUDFirebase.consultarEventos(ubicacionPredeterminada);
-          paneles = grid.crearPaneles(listaEventos);
-          nuevoGrid = grid.crearGridPane(columna, fila, paneles);
-          borderPaneEventos.setCenter(nuevoGrid);
-      } catch (IOException e) {
+    // Listener para cambios en el valor del ComboBox de ubicación.
+    ubicacion.valueProperty().addListener(new ChangeListener<String>() {
+      @Override
+      public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+        try {
+          // Actualiza los eventos mostrados según la nueva ubicación seleccionada.
+          actualizarSegunUbicacion(newValue);
+        } catch (IOException e) {
           e.printStackTrace();
+        }
       }
+    });
+
+    // Listener para cuando el ComboBox se muestra.
+    ubicacion.showingProperty().addListener((obs, oldValue, newValue) -> {
+      if (newValue) {
+        // Agrega las provincias al ComboBox.
+        agregarProvincias();
+      }
+    });
+
+    try {
+      // Inicializa las provincias en el ComboBox.
+      agregarProvincias();
+      // Obtiene la ubicación predeterminada desde el controlador de login.
+      ubicacionPredeterminada = LoginController.mostrarUbicacionPredeteminada();
+      // Establece el valor del ComboBox en la ubicación predeterminada.
+      ubicacion.setValue(ubicacionPredeterminada);
+      // Consulta los eventos para la ubicación predeterminada.
+      listaEventos = CRUDFirebase.consultarEventos(ubicacionPredeterminada);
+      // Crea los paneles para cada evento.
+      paneles = grid.crearPaneles(listaEventos);
+      // Crea el GridPane con los paneles de eventos.
+      nuevoGrid = grid.crearGridPane(columna, fila, paneles);
+      // Establece el nuevo GridPane en el centro del BorderPane.
+      borderPaneEventos.setCenter(nuevoGrid);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
-  
+
+  // Método para agregar las provincias al ComboBox.
   void agregarProvincias() {
-    // Lista de provincias de España
+    // Lista de provincias de España.
     List<String> provincias = new ArrayList<>();
     provincias.add("Álava");
     provincias.add("Albacete");
@@ -125,42 +141,45 @@ public class VerEventosController implements Initializable {
     provincias.add("Zamora");
     provincias.add("Zaragoza");
 
+    // Limpia los elementos actuales del ComboBox.
     ubicacion.getItems().clear();
 
-    // Agregar todas las provincias al ComboBox
+    // Agrega todas las provincias al ComboBox.
     ubicacion.getItems().addAll(provincias);
   }
 
+  // Método para limpiar las listas de eventos y paneles.
   private static void limpiarListas() {
     listaEventos.clear();
     paneles.clear();
   }
 
-  // Método para devolver la lista de eventos
+  // Método para obtener la lista de eventos.
   public List<Evento> getListaEventos() {
     return listaEventos;
   }
 
+  // Método para actualizar los eventos según la ubicación seleccionada.
   public void actualizarSegunUbicacion(String ubicacionSeleccionada) throws IOException {
     try {
-        limpiarListas();
-        // Consultar eventos según la ubicación seleccionada
-        listaEventos = CRUDFirebase.consultarEventos(ubicacionSeleccionada);
+      // Limpia las listas de eventos y paneles.
+      limpiarListas();
+      // Consulta los eventos para la ubicación seleccionada.
+      listaEventos = CRUDFirebase.consultarEventos(ubicacionSeleccionada);
 
-        // Limpiar el GridPane y la lista de paneles
-        borderPaneEventos.getChildren().clear();
-        paneles.clear();
+      // Limpia los hijos del BorderPane.
+      borderPaneEventos.getChildren().clear();
+      paneles.clear();
 
-        // Crear los nuevos paneles para los eventos filtrados
-        paneles = grid.crearPaneles(listaEventos);
+      // Crea los paneles para cada evento.
+      paneles = grid.crearPaneles(listaEventos);
 
-        // Crear el nuevo GridPane y establecerlo en el BorderPane
-        nuevoGrid = grid.crearGridPane(0, 0, paneles);
-        borderPaneEventos.setCenter(nuevoGrid);
+      // Crea el GridPane con los paneles de eventos.
+      nuevoGrid = grid.crearGridPane(0, 0, paneles);
+      // Establece el nuevo GridPane en el centro del BorderPane.
+      borderPaneEventos.setCenter(nuevoGrid);
     } catch (IOException e) {
-        e.printStackTrace();
+      e.printStackTrace();
     }
-}
-
-  
+  }
 }

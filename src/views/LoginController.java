@@ -24,32 +24,46 @@ import utils.HashPassword;
 
 public class LoginController implements Initializable {
 
+  // Referencia al panel raíz.
   public static BorderPane root;
+
+  // Referencia al escenario principal.
   private Stage stage;
+
+  // Variable para almacenar la ubicación seleccionada.
   private String ubicacionSeleccionada;
 
-  // Todos los elementos del Login
+  // Botón de cancelar.
   @FXML
   private JFXButton btnCancel;
 
+  // Botón de iniciar sesión.
   @FXML
   private JFXButton btnLogin;
 
+  // Botón de ir atrás.
   @FXML
   private JFXButton btnAtras;
 
+  // Campo de contraseña.
   @FXML
   private JFXPasswordField txtPassword;
 
+  // Campo de usuario.
   @FXML
   private JFXTextField txtUser;
 
+  // Label de tipo.
   @FXML
   private Label txtTipo;
 
+  // Variable para comprobar la cuenta.
   public static Cuenta comprobar;
 
-  // Metodo que realiza y comprueba el login de la cuenta
+  // Variable para almacenar el correo del usuario logueado.
+  public static String loggedInUserMail = ""; // CRUDFirebase.consultarCorreo(Cuenta.getUsuario());
+
+  // Método que realiza y comprueba el login de la cuenta.
   @FXML
   void logeo(MouseEvent event) throws IOException, Exception {
 
@@ -64,7 +78,9 @@ public class LoginController implements Initializable {
       if (usuarioConsultado.equalsIgnoreCase(usuario) && passwdConsultado.equalsIgnoreCase(hasPass)) {
         registrado = true;
         comprobar = CRUDFirebase.obtenerDatosCuenta(usuario);
-        // Si coinciden los datos, inicia la vista principal de la aplicacion
+        loggedInUserMail = CRUDFirebase.consultarCorreo(usuario);
+
+        // Si coinciden los datos, inicia la vista principal de la aplicación.
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
         root = loader.load();
         PrincipalController control = loader.getController();
@@ -87,14 +103,13 @@ public class LoginController implements Initializable {
         alertaError();
       }
 
-      // Mirar aquí
     } catch (NullPointerException e) {
       alertaError();
     }
 
   }
 
-//Metodo para volver a la pantalla previa de la aplicacion
+  // Método para volver a la pantalla previa de la aplicación.
   @FXML
   void atras(MouseEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PreviaView.fxml"));
@@ -110,50 +125,48 @@ public class LoginController implements Initializable {
     }
   }
 
-  // Metodo para salir de la aplicacion
+  // Método para salir de la aplicación.
   @FXML
   void salir(MouseEvent event) {
     Platform.exit();
   }
 
-  // Metodo que muestra la alerta de error
+  // Método que muestra la alerta de error.
   public static void alertaError() {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
     alert.setContentText("Usuario no existe: comprueba tu usuario y tu contraseña.");
     alert.showAndWait();
-
   }
 
-//Metodo que muestra la alerta de error
+  // Método que muestra la alerta de error en la aplicación.
   public static void alertaFalloApp() {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
     alert.setContentText("App no disponible");
     alert.showAndWait();
-
   }
 
-//Metodo que muestra la alerta de null
+  // Método que muestra la alerta de campos vacíos.
   public static void alertaVacio() {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Error");
     alert.setContentText("Campos vacíos");
     alert.showAndWait();
-
   }
-  
+
+  // Método que muestra la ubicación predeterminada.
   public static String mostrarUbicacionPredeteminada() {
     String ubicacionPredeterminada = CRUDFirebase.consultarUbicacion(comprobar.getUsuario());
     return ubicacionPredeterminada;
   }
 
+  // Establece el escenario principal.
   public void setStage(Stage primaryStage) {
     stage = primaryStage;
-
   }
 
-  // Inicializa
+  // Inicializa el controlador.
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 

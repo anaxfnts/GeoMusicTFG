@@ -28,6 +28,6 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <JFXComboBox id="ubicacion" fx:id="ubicacion" focusColor="#fcfcfc" layoutX="6.0" layoutY="8.0" prefHeight="25.0" prefWidth="152.0" promptText="Elige ubicación" style="-fx-background-color: black; -fx-border-color: D886FF;" styleClass="ubicacion" stylesheets="@../application/application.css" unFocusColor="BLACK" />
+      <JFXComboBox id="ubicacion" fx:id="ubicacion" focusColor="#fcfcfc" layoutX="6.0" layoutY="8.0" prefHeight="25.0" prefWidth="152.0" promptText="Elige ubicación" style="-fx-background-color: D886FF; -fx-border-color: black;" styleClass="ubicacion" stylesheets="@../application/application.css" unFocusColor="BLACK" />
    </children>
 </AnchorPane>

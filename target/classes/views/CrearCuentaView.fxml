@@ -61,6 +61,12 @@
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Label>
+            <JFXPasswordField fx:id="txtPasswordComprobado" focusColor="WHITE" layoutX="297.0" layoutY="325.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" unFocusColor="#4d4d4d00" />
+            <Label ellipsisString="" layoutX="297.0" layoutY="303.0" text="Repite Contraseña" textFill="#d886ff">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Label layoutX="358.0" layoutY="119.0" prefHeight="74.0" prefWidth="214.0" text="GeoMusic" textFill="#d886ff">

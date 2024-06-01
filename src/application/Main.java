@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import views.PreviaController;
 
 public class Main extends Application {
+
+  // Método start para iniciar la aplicación
   @Override
   public void start(Stage primaryStage) throws IOException {
 
@@ -29,9 +31,8 @@ public class Main extends Application {
     CRUDFirebase conexion = new CRUDFirebase();
   }
 
-  // Ejecuta la función que carga la vista
+  // Método main para ejecutar la aplicación
   public static void main(String[] args) {
     launch(args);
-
   }
 }

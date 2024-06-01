@@ -19,9 +19,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1038.0" prefWidth="1888.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.CrearCuentaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1038.0" prefWidth="1888.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.VerCuentaController">
    <children>
-      <Pane layoutX="688.0" layoutY="225.0" prefHeight="524.0" prefWidth="512.0" style="-fx-background-color: black; -fx-background-radius: 40;">
+      <Pane layoutX="432.0" layoutY="171.0" prefHeight="524.0" prefWidth="512.0" style="-fx-background-color: black; -fx-background-radius: 40;">
          <children>
             <Label layoutX="14.0" layoutY="154.0" text="Nombre" textFill="#d886ff">
                <font>
@@ -31,12 +31,7 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <Label layoutX="80.0" layoutY="37.0" prefHeight="74.0" prefWidth="353.0" text="Crea una cuenta" textFill="WHITE">
-               <font>
-                  <Font name="System Bold Italic" size="45.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="btnCrear" layoutX="354.0" layoutY="396.0" onMouseClicked="#crearCuenta" prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: #d886ff; -fx-background-radius: 40;" text="Listo">
+            <JFXButton layoutX="354.0" layoutY="396.0" prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: #d886ff; -fx-background-radius: 40;" text="Editar">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -61,27 +56,16 @@
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Label>
-            <JFXPasswordField fx:id="txtPasswordComprobado" focusColor="WHITE" layoutX="297.0" layoutY="325.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" unFocusColor="#4d4d4d00" />
-            <Label ellipsisString="" layoutX="297.0" layoutY="303.0" text="Repite Contraseña" textFill="#d886ff">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
-      <Label layoutX="358.0" layoutY="119.0" prefHeight="74.0" prefWidth="214.0" text="GeoMusic" textFill="#d886ff">
+      <Label layoutX="249.0" layoutY="84.0" prefHeight="74.0" prefWidth="301.0" text="Ver cuenta" textFill="#d886ff">
          <font>
             <Font name="Arial Black" size="37.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnAtras" layoutX="240.0" layoutY="97.0" onMouseClicked="#atras" prefHeight="119.0" prefWidth="126.0" text="←" textFill="#d886ff">
+      <JFXButton fx:id="btnAtras" layoutX="139.0" layoutY="61.0" onMouseClicked="#atras" prefHeight="119.0" prefWidth="126.0" text="←" textFill="#d886ff">
          <font>
             <Font size="55.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="btnCancel" layoutX="1385.0" layoutY="749.0" onMouseClicked="#salir" prefHeight="32.0" prefWidth="89.0" style="-fx-background-color: white; -fx-background-radius: 40;" text="Salir">
-         <font>
-            <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
    </children>

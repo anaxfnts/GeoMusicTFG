@@ -9,6 +9,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
 public class ConexionFirebase {
+  
   private static Firestore firestore;
 
   public static Firestore iniciarFirebase() {

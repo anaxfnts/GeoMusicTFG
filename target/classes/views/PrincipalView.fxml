@@ -47,7 +47,7 @@
                         <Image url="@../images/profile.jpg" />
                      </image>
                   </ImageView>
-                  <JFXButton fx:id="btnVerCuenta" layoutX="1167.0" layoutY="20.0" prefHeight="34.0" prefWidth="105.0" style="-fx-background-color: D886FF; -fx-background-radius: 40;" text="Ver cuenta">
+                  <JFXButton fx:id="btnVerCuenta" layoutX="1167.0" layoutY="20.0" onMouseClicked="#verCuenta" prefHeight="34.0" prefWidth="105.0" style="-fx-background-color: D886FF; -fx-background-radius: 40;" text="Ver cuenta">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

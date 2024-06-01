@@ -61,6 +61,9 @@ public class CrearCuentaController implements Initializable {
   @FXML
   private JFXPasswordField txtPassword;
 
+  @FXML
+  private JFXPasswordField txtPasswordComprobado;
+
   void agregarProvincias() {
     // Lista de provincias de España
     List<String> provincias = new ArrayList<>();
@@ -129,6 +132,8 @@ public class CrearCuentaController implements Initializable {
     String contrasenyaHash = HashPassword.convertirSHA256(txtPassword.getText());
     if (usuario.isEmpty()) {
       alertaVacio();
+    } else if (!txtPassword.getText().equals(txtPasswordComprobado.getText())) {
+      alertaNoCoinciden();
     } else {
 
       if (usuarioConsultado.equalsIgnoreCase(usuario)) {
@@ -145,7 +150,7 @@ public class CrearCuentaController implements Initializable {
         WriteResult writeResult = docRef.set(cuenta).get();
 
         System.out.println("Cuenta añadida con ID: " + usuario);
-        
+
         alertaCuentaCreada();
 
         // Abre la ventana PrincipalView.fxml
@@ -202,7 +207,16 @@ public class CrearCuentaController implements Initializable {
     alert.showAndWait();
 
   }
-  
+
+//Metodo que muestra la alerta de null
+  public static void alertaNoCoinciden() {
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Error");
+    alert.setContentText("Las contraseñas no coinciden");
+    alert.showAndWait();
+
+  }
+
 //Metodo que muestra que se ha creado la cuenta
   public static void alertaCuentaCreada() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

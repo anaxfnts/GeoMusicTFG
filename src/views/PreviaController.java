@@ -19,32 +19,39 @@ import javafx.stage.Stage;
 
 public class PreviaController {
 
+  // Referencia al panel raíz.
   public static BorderPane root;
+
+  // Referencia al escenario principal.
   private Stage stage;
 
-  // Todos los elementos de la primera pantalla
+  // Botón de cancelar.
   @FXML
   private JFXButton btnCancel;
 
+  // Botón de iniciar sesión.
   @FXML
   private JFXButton btnLogin;
 
+  // Botón de crear cuenta.
   @FXML
   private JFXButton btnCrearCuenta;
 
+  // Icono de Facebook.
   @FXML
   private ImageView facebook;
 
+  // Icono de Instagram.
   @FXML
   private ImageView instagram;
 
+  // Icono de Twitter.
   @FXML
   private ImageView twitter;
 
+  // Maneja el evento de clic para iniciar sesión.
   @FXML
   void logeo(MouseEvent event) throws IOException {
-
-    // Si pulsa el boton iniciar sesion, carga LoginView
     FXMLLoader loade = new FXMLLoader(getClass().getResource("/views/LoginView.fxml"));
     AnchorPane root = loade.load();
     Scene escena = new Scene(root);
@@ -54,13 +61,11 @@ public class PreviaController {
     if (this.stage != null) {
       this.stage.close();
     }
-
   }
 
+  // Maneja el evento de clic para crear cuenta.
   @FXML
   void crearCuenta(MouseEvent event) throws IOException {
-
-    // Si pulsa el boton crear cuenta, carga CrearCuentaView
     FXMLLoader loade = new FXMLLoader(getClass().getResource("/views/CrearCuentaView.fxml"));
     AnchorPane root = loade.load();
     Scene escena = new Scene(root);
@@ -70,16 +75,15 @@ public class PreviaController {
     if (this.stage != null) {
       this.stage.close();
     }
-
   }
 
-  // Metodo para salir de la aplicacion
+  // Método para salir de la aplicación.
   @FXML
   void salir(MouseEvent event) {
     Platform.exit();
   }
 
-  // Metodo para dirigirse a la web de Facebook
+  // Método para abrir la web de Facebook.
   @FXML
   void webFacebook(MouseEvent event) {
     URL url = null;
@@ -87,17 +91,15 @@ public class PreviaController {
       url = new URL("https://es-es.facebook.com/");
       try {
         Desktop.getDesktop().browse(url.toURI());
-      } catch (IOException e) {
-        e.printStackTrace();
-      } catch (URISyntaxException e) {
+      } catch (IOException | URISyntaxException e) {
         e.printStackTrace();
       }
-    } catch (MalformedURLException e1) {
-      e1.printStackTrace();
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
     }
   }
 
-//Metodo para dirigirse a la web de Instagram
+  // Método para abrir la web de Instagram.
   @FXML
   void webInstagram(MouseEvent event) {
     URL url = null;
@@ -105,17 +107,15 @@ public class PreviaController {
       url = new URL("http://instagram.com/");
       try {
         Desktop.getDesktop().browse(url.toURI());
-      } catch (IOException e) {
-        e.printStackTrace();
-      } catch (URISyntaxException e) {
+      } catch (IOException | URISyntaxException e) {
         e.printStackTrace();
       }
-    } catch (MalformedURLException e1) {
-      e1.printStackTrace();
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
     }
   }
 
-//Metodo para dirigirse a la web de Twitter
+  // Método para abrir la web de Twitter.
   @FXML
   void webTwitter(MouseEvent event) {
     URL url = null;
@@ -123,28 +123,24 @@ public class PreviaController {
       url = new URL("https://twitter.com/?lang=es");
       try {
         Desktop.getDesktop().browse(url.toURI());
-      } catch (IOException e) {
-        e.printStackTrace();
-      } catch (URISyntaxException e) {
+      } catch (IOException | URISyntaxException e) {
         e.printStackTrace();
       }
-    } catch (MalformedURLException e1) {
-      e1.printStackTrace();
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
     }
   }
 
-  // Metodo que muestra la alerta de error
+  // Método que muestra una alerta de error.
   public static void alertaError() {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
     alert.setContentText("Usuario incorrecto");
     alert.showAndWait();
-
   }
 
+  // Establece el escenario principal.
   public void setStage(Stage primaryStage) {
     stage = primaryStage;
-
   }
-
 }

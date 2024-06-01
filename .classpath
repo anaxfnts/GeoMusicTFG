@@ -19,5 +19,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/anar2/eclipse-workspace/GeoMusic/jarMail/javax.mail.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
