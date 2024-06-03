@@ -2,31 +2,36 @@ package views;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javax.mail.MessagingException;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import firebase.CRUDFirebase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import models.Emails;
 import models.Evento;
-import utils.EmailUtility;
 
 public class EventoController {
 
   private Evento evento = null;
+  private String correoUsuario;
+
   @FXML
   private Label lblNombreEvento;
 
@@ -66,44 +71,68 @@ public class EventoController {
     cuadrado.setFill(new ImagePattern(imagen));
   }
 
-  public void markAsFavorite(MouseEvent event) throws FileNotFoundException {
-    if (evento != null) {
-      System.out.println("Marked as favorite: " + evento.getNombreEvento());
 
-      String artista = evento.getArtista();
-      String nombreEvento = evento.getNombreEvento();
-      String fecha = evento.getFecha();
-      String ubicacion = evento.getUbicacion();
-      String descripcion = evento.getDescripcion();
+//Metodo que permite enviar un email al cliente
+@FXML
+void enviarEmailCliente(MouseEvent event) throws IOException, MessagingException {
+   // Obtener el nombre de usuario
+   correoUsuario = LoginController.mostrarNombreUsuario();
+   System.out.println("Correo usuario obtenido: " + correoUsuario);
+   
+   // Verificar si el usuario es nulo
+   if (correoUsuario == null) {
+       System.err.println("Usuario no inicializado.");
+       alertaErrorCorreo();
+       return;
+   }
+   
+   // Consultar el correo del usuario
+   String correo = CRUDFirebase.consultarCorreo(correoUsuario);
+   System.out.println("Correo obtenido de Firebase: " + correo);
+   
+   // Verificar si el correo es nulo
+   if (correo == null || correo.isEmpty()) {
+       System.err.println("Correo no encontrado para el usuario: " + correoUsuario);
+       alertaErrorCorreo();
+       return;
+   }
+   
+   try {
+       // Enviar el email
+       Emails e = new Emails();
+       e.enviar(correo, 
+           "Evento marcado como Favorito: " + evento.getNombreEvento(),
+           "Estimado usuario, \n" +
+           "Aquí está toda la información resumida acerca del evento: \n\n" +
+           "Artista: " + evento.getArtista() + "\n" +
+           "Fecha: " + evento.getFecha() + "\n" +
+           "Ubicación: " + evento.getUbicacion() + "\n" +
+           "Descripción: " + evento.getDescripcion() + "\n\n" +
+           "Descripción: " + evento.getDescripcion() + "\n\n" +
+           "¡Esperamos que disfrutes del evento!"
+       );
+       alertaEnviado();
+   } catch (Exception e) {
+       System.err.println("Error enviando el correo: " + e.getMessage());
+       e.printStackTrace();
+       alertaErrorCorreo();
+   }
+}
 
-      Image imagen = new Image(new FileInputStream("imagenes" + "/" + evento.getImagenEvento()));
+  // Metodo que muestra una alerta de error cuando no se envia el correo 
+  private static void alertaErrorCorreo() {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setContentText("Correo electrónico no enviado. Por favor, inténtalo más tarde.");
+    alert.showAndWait();
+  }
 
-      String detallesEvento = String.format("Event: %s\nArtist: %s\nDate: %s\nLocation: %s\nDescription: %s\n",
-          nombreEvento, artista, fecha, ubicacion, descripcion);
-      String subject = "Información de tu evento marcado como Favorito: - " + nombreEvento;
-      String htmlContent = "<h1>" + nombreEvento + "</h1>" + "<p><strong>Artista:</strong> " + artista + "</p>"
-          + "<p><strong>Fecha:</strong> " + fecha + "</p>" + "<p><strong>Ubicacion:</strong> " + ubicacion + "</p>"
-          + "<p><strong>Descripcion:</strong> " + descripcion + "</p>" + "<img src='" + imagen
-          + "' alt='Event Image'/>";
-      String plainText = detallesEvento;
-
-      try {
-        EmailUtility.sendEmail("anar27fp@gmail.com", subject, plainText, htmlContent);
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Evento marcado como favorito");
-        alert.setHeaderText(null);
-        alert.setContentText("Email de recordatorio enviado correctamente!");
-        alert.showAndWait();
-      } catch (Exception e) {
-        System.err.println("Error enviando el email de recordatorio: " + e.getMessage());
-        Alert errorAlert = new Alert(AlertType.ERROR);
-        errorAlert.setTitle("Error");
-        errorAlert.setHeaderText("Failed to Send Email Reminder");
-        errorAlert
-            .setContentText("Hubo un error enviando el correo. Por favor, revisa tu concexión e inténtalo más tarde.");
-        errorAlert.showAndWait();
-      }
-    }
+  // Metodo que confirma que se ha enviado el correo
+  private static void alertaEnviado() {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Correo electrónico enviado");
+    alert.setContentText("Comprueba tu bandeja de entrada.");
+    alert.showAndWait();
   }
 
   public void openReviewScreen(MouseEvent event) {

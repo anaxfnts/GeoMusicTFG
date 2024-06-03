@@ -147,6 +147,7 @@ public class CrearCuentaController implements Initializable {
             ubicacion.getValue(), txtCorreo.getText().trim(), "Normal", false);
 
         // Guarda el objeto Cuenta en Firestore
+        @SuppressWarnings("unused")
         WriteResult writeResult = docRef.set(cuenta).get();
 
         System.out.println("Cuenta añadida con ID: " + usuario);
@@ -160,6 +161,7 @@ public class CrearCuentaController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(escena);
         stage.setMaximized(true);
+        stage.setResizable(false);
         stage.getIcons().add(new Image("images/logo.png"));
         stage.show();
         if (this.stage != null) {
@@ -177,6 +179,7 @@ public class CrearCuentaController implements Initializable {
     Stage stage = new Stage();
     stage.setScene(escena);
     stage.setMaximized(true);
+    stage.setResizable(false);
     stage.getIcons().add(new Image("images/logo.png"));
     stage.show();
     if (this.stage != null) {

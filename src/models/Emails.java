@@ -1,5 +1,6 @@
 package models;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -25,11 +26,11 @@ public class Emails {
 		//Indicamos el usuario y contraseña desde donde se envian los emails
 		props.put("from", "geomusic95@gmail.com");
 		props.put("username", "geomusic95@gmail.com");
-		props.put("password", "galletita7");
+		props.put("password", "kmsm cdap lftl ntcp");
 	}
 	
 	//M�todo para enviar correos electronicos
-	public void enviar(String to, String asunto, String cuerpoMensaje) throws MessagingException{
+	public void enviar(String to, String asunto, String cuerpoMensaje) throws MessagingException, UnsupportedEncodingException{
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(props.getProperty("username"), props.getProperty("password"));
@@ -37,7 +38,7 @@ public class Emails {
 		});
 		
 		Message mensaje = new MimeMessage(session);
-		mensaje.setFrom(new InternetAddress(props.getProperty("from")));
+		mensaje.setFrom(new InternetAddress(props.getProperty("from"), "GeoMusic"));
 		mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 		mensaje.setSubject(asunto);
 		mensaje.setText(cuerpoMensaje);

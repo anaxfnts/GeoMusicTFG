@@ -25,6 +25,7 @@ public class Main extends Application {
     PreviaController controlador = loader.getController();
     controlador.setStage(primaryStage);
     primaryStage.setMaximized(true);
+    primaryStage.setResizable(false);
     primaryStage.getIcons().add(new Image("images/logo.png"));
     primaryStage.setTitle("GeoMusic");
     primaryStage.show();

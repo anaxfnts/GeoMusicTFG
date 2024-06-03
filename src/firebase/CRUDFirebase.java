@@ -166,7 +166,7 @@ public class CRUDFirebase {
   }
   
   public static String consultarCorreo(String usuario) {
-    // Validar que la contraseña no sea ni nula ni vacía
+    // Validar que el correo no sea ni nulo ni vacío
     if (usuario == null || usuario.isEmpty()) {
       System.out.println("El correo es nulo o vacío.");
       return "";

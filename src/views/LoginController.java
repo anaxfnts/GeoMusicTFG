@@ -61,7 +61,7 @@ public class LoginController implements Initializable {
   public static Cuenta comprobar;
 
   // Variable para almacenar el correo del usuario logueado.
-  public static String loggedInUserMail = ""; // CRUDFirebase.consultarCorreo(Cuenta.getUsuario());
+  public static String loggedInUserMail = ""; 
 
   // Método que realiza y comprueba el login de la cuenta.
   @FXML
@@ -87,7 +87,7 @@ public class LoginController implements Initializable {
         Scene escena = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(escena);
-        control.init(stage, this, comprobar.getNombre(), root, comprobar.getTipo());
+        control.initLogin(stage, this, comprobar.getNombre(), root, comprobar.getTipo());
         stage.show();
 
         if (this.stage != null) {
@@ -160,6 +160,12 @@ public class LoginController implements Initializable {
     String ubicacionPredeterminada = CRUDFirebase.consultarUbicacion(comprobar.getUsuario());
     return ubicacionPredeterminada;
   }
+  
+//Método que muestra la ubicación predeterminada.
+ public static String mostrarNombreUsuario() {
+   String usuario = CRUDFirebase.consultarUsuario(comprobar.getUsuario());
+   return usuario;
+ }
 
   // Establece el escenario principal.
   public void setStage(Stage primaryStage) {

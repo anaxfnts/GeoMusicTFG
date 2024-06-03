@@ -81,9 +81,9 @@
     </dependency>
     
     <dependency>
-    <groupId>com.mailersend</groupId>
-    <artifactId>java-sdk</artifactId>
-    <version>1.0.0</version>
+    <groupId>com.sun.mail</groupId>
+    <artifactId>javax.mail</artifactId>
+    <version>1.6.2</version>
 </dependency>
 
 	</dependencies>

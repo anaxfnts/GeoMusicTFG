@@ -28,6 +28,10 @@ public class PrincipalController {
   // Controlador del login.
   @SuppressWarnings("unused")
   private LoginController controLogin;
+  
+//Controlador del login.
+ @SuppressWarnings("unused")
+ private VerCuentaController verCuenta;
 
   // Controlador de la creación de cuenta.
   @SuppressWarnings("unused")
@@ -66,15 +70,33 @@ public class PrincipalController {
   private JFXButton btnVerCuenta;
 
   // Método para inicializar la interfaz con el controlador de login.
-  void init(Stage stage, LoginController loginController, String nombre, BorderPane border, String tipoCuenta)
+  void initLogin(Stage stage, LoginController loginController, String nombre, BorderPane root, String tipoCuenta)
       throws IOException {
     this.stage = stage;
     this.controLogin = loginController;
     lblNombre.setText(nombre);
     lblTipoCuenta.setText(tipoCuenta);
-    this.borderPane = border;
+    this.borderPane = root;
 
     stage.setMaximized(true);
+    stage.setResizable(false);
+    stage.getIcons().add(new Image("images/logo.PNG"));
+    stage.setTitle("GeoMusic");
+
+    stage.show();
+    escenaEventos();
+  }
+  
+  void initVerCuenta(Stage stage, VerCuentaController verCuentaController, String nombre, BorderPane root, String tipoCuenta)
+      throws IOException {
+    this.stage = stage;
+    this.verCuenta = verCuentaController;
+    lblNombre.setText(nombre);
+    lblTipoCuenta.setText(tipoCuenta);
+    this.borderPane = root;
+
+    stage.setMaximized(true);
+    stage.setResizable(false);
     stage.getIcons().add(new Image("images/logo.PNG"));
     stage.setTitle("GeoMusic");
 
@@ -83,7 +105,7 @@ public class PrincipalController {
   }
 
   // Método para inicializar la interfaz con el controlador de creación de cuenta.
-  void init(Stage stage, CrearCuentaController crearController, String nombre, BorderPane border, String tipoCuenta)
+  void initCrearCuenta(Stage stage, CrearCuentaController crearController, String nombre, BorderPane border, String tipoCuenta)
       throws IOException {
     this.stage = stage;
     this.crearCuenta = crearController;
@@ -92,6 +114,7 @@ public class PrincipalController {
     this.borderPane = border;
 
     stage.setMaximized(true);
+    stage.setResizable(false);
     stage.getIcons().add(new Image("images/logo.PNG"));
     stage.setTitle("GeoMusic");
 
@@ -129,6 +152,7 @@ public class PrincipalController {
     Stage stage = new Stage();
     stage.setScene(escena);
     stage.setMaximized(true);
+    stage.setResizable(false);
     stage.getIcons().add(new Image("images/logo.png"));
     stage.show();
     if (this.stage != null) {
@@ -148,6 +172,7 @@ public class PrincipalController {
     Stage stage = new Stage();
     stage.setScene(escena);
     stage.setMaximized(true);
+    stage.setResizable(false);
     stage.getIcons().add(new Image("images/logo.png"));
     stage.show();
     if (this.stage != null) {
@@ -155,18 +180,7 @@ public class PrincipalController {
     }
   }
   
-  public void cargarVistaCuenta() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VerCuenta.fxml"));
-    AnchorPane root = loader.load();
-    borderPane.setCenter(root);
-}
-
-public void cargarVistaEventos() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VerEventos.fxml"));
-    AnchorPane root = loader.load();
-    borderPane.setCenter(root);
-}
-
+ 
   // Establece la lista de eventos.
   public void setEventos(List<Evento> listaEventos) {
     this.eventos = listaEventos;
