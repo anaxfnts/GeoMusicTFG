@@ -40,6 +40,12 @@ public class VerEventosController implements Initializable {
   @FXML
   private JFXComboBox<String> ubicacion;
 
+  /**
+   * Método initialize que se llama automáticamente al cargar la vista.
+   * 
+   * @param location  URL de localización del recurso.
+   * @param resources Conjunto de recursos para internacionalización.
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     int fila = 0;
@@ -86,16 +92,18 @@ public class VerEventosController implements Initializable {
     }
   }
 
-  // Método para agregar las provincias al ComboBox.
+  /**
+   * Método para agregar las provincias al ComboBox.
+   */
   void agregarProvincias() {
     // Lista de provincias de España.
     List<String> provincias = new ArrayList<>();
-    provincias.add("Álava");
+    provincias.add("Alava");
     provincias.add("Albacete");
     provincias.add("Alicante");
     provincias.add("Almería");
     provincias.add("Asturias");
-    provincias.add("Ávila");
+    provincias.add("Avila");
     provincias.add("Badajoz");
     provincias.add("Barcelona");
     provincias.add("Burgos");
@@ -148,18 +156,30 @@ public class VerEventosController implements Initializable {
     ubicacion.getItems().addAll(provincias);
   }
 
-  // Método para limpiar las listas de eventos y paneles.
+  /**
+   * Método para limpiar las listas de eventos y paneles.
+   */
   private static void limpiarListas() {
     listaEventos.clear();
     paneles.clear();
   }
 
-  // Método para obtener la lista de eventos.
+  /**
+   * Método para obtener la lista de eventos.
+   * 
+   * @return List<Evento> Lista de eventos.
+   */
   public List<Evento> getListaEventos() {
     return listaEventos;
   }
 
-  // Método para actualizar los eventos según la ubicación seleccionada.
+  /**
+   * Método para actualizar los eventos según la ubicación seleccionada.
+   * 
+   * @param ubicacionSeleccionada La ubicación seleccionada para filtrar los
+   *                              eventos.
+   * @throws IOException Si ocurre un error al consultar los eventos.
+   */
   public void actualizarSegunUbicacion(String ubicacionSeleccionada) throws IOException {
     try {
       // Limpia las listas de eventos y paneles.

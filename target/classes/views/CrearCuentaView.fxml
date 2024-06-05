@@ -67,6 +67,11 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
+            <Label ellipsisString="" layoutX="366.0" layoutY="157.0" text="(No se podrá modificar)" textFill="#d886ff">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Label layoutX="358.0" layoutY="119.0" prefHeight="74.0" prefWidth="214.0" text="GeoMusic" textFill="#d886ff">

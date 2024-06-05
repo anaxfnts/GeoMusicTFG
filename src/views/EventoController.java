@@ -59,6 +59,13 @@ public class EventoController {
   @FXML
   private Rectangle cuadrado;
 
+  /**
+   * Establece los datos del evento en los campos correspondientes.
+   *
+   * @param eventos El evento con los datos a establecer.
+   * @throws FileNotFoundException Si ocurre un error al encontrar el archivo de
+   *                               imagen.
+   */
   public void setDatos(Evento eventos) throws FileNotFoundException {
     evento = eventos;
     lblNombreEvento.setText(eventos.getNombreEvento());
@@ -71,55 +78,56 @@ public class EventoController {
     cuadrado.setFill(new ImagePattern(imagen));
   }
 
+  /**
+   * Envía un email al cliente con información sobre el evento.
+   *
+   * @param event El evento de ratón que dispara el método.
+   * @throws IOException        Si ocurre un error de E/S.
+   * @throws MessagingException Si ocurre un error al enviar el mensaje.
+   */
+  @FXML
+  void enviarEmailCliente(MouseEvent event) throws IOException, MessagingException {
+    // Obtener el nombre de usuario
+    correoUsuario = LoginController.mostrarNombreUsuario();
+    System.out.println("Correo usuario obtenido: " + correoUsuario);
 
-//Metodo que permite enviar un email al cliente
-@FXML
-void enviarEmailCliente(MouseEvent event) throws IOException, MessagingException {
-   // Obtener el nombre de usuario
-   correoUsuario = LoginController.mostrarNombreUsuario();
-   System.out.println("Correo usuario obtenido: " + correoUsuario);
-   
-   // Verificar si el usuario es nulo
-   if (correoUsuario == null) {
-       System.err.println("Usuario no inicializado.");
-       alertaErrorCorreo();
-       return;
-   }
-   
-   // Consultar el correo del usuario
-   String correo = CRUDFirebase.consultarCorreo(correoUsuario);
-   System.out.println("Correo obtenido de Firebase: " + correo);
-   
-   // Verificar si el correo es nulo
-   if (correo == null || correo.isEmpty()) {
-       System.err.println("Correo no encontrado para el usuario: " + correoUsuario);
-       alertaErrorCorreo();
-       return;
-   }
-   
-   try {
-       // Enviar el email
-       Emails e = new Emails();
-       e.enviar(correo, 
-           "Evento marcado como Favorito: " + evento.getNombreEvento(),
-           "Estimado usuario, \n" +
-           "Aquí está toda la información resumida acerca del evento: \n\n" +
-           "Artista: " + evento.getArtista() + "\n" +
-           "Fecha: " + evento.getFecha() + "\n" +
-           "Ubicación: " + evento.getUbicacion() + "\n" +
-           "Descripción: " + evento.getDescripcion() + "\n\n" +
-           "Descripción: " + evento.getDescripcion() + "\n\n" +
-           "¡Esperamos que disfrutes del evento!"
-       );
-       alertaEnviado();
-   } catch (Exception e) {
-       System.err.println("Error enviando el correo: " + e.getMessage());
-       e.printStackTrace();
-       alertaErrorCorreo();
-   }
-}
+    // Verificar si el usuario es nulo
+    if (correoUsuario == null) {
+      System.err.println("Usuario no inicializado.");
+      alertaErrorCorreo();
+      return;
+    }
 
-  // Metodo que muestra una alerta de error cuando no se envia el correo 
+    // Consultar el correo del usuario
+    String correo = CRUDFirebase.consultarCorreo(correoUsuario);
+    System.out.println("Correo obtenido de Firebase: " + correo);
+
+    // Verificar si el correo es nulo
+    if (correo == null || correo.isEmpty()) {
+      System.err.println("Correo no encontrado para el usuario: " + correoUsuario);
+      alertaErrorCorreo();
+      return;
+    }
+
+    try {
+      // Enviar el email
+      Emails e = new Emails();
+      e.enviar(correo, "Evento marcado como Favorito: " + evento.getNombreEvento(),
+          "Estimado usuario, \n" + "Aquí está toda la información resumida acerca del evento: \n\n" + "Artista: "
+              + evento.getArtista() + "\n" + "Fecha: " + evento.getFecha() + "\n" + "Ubicación: "
+              + evento.getUbicacion() + "\n" + "Descripción: " + evento.getDescripcion() + "\n\n"
+              + "¡Esperamos que disfrutes del evento!");
+      alertaEnviado();
+    } catch (Exception e) {
+      System.err.println("Error enviando el correo: " + e.getMessage());
+      e.printStackTrace();
+      alertaErrorCorreo();
+    }
+  }
+
+  /**
+   * Muestra una alerta de error cuando no se envía el correo.
+   */
   private static void alertaErrorCorreo() {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
@@ -127,7 +135,9 @@ void enviarEmailCliente(MouseEvent event) throws IOException, MessagingException
     alert.showAndWait();
   }
 
-  // Metodo que confirma que se ha enviado el correo
+  /**
+   * Muestra una alerta confirmando que el correo se ha enviado.
+   */
   private static void alertaEnviado() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Correo electrónico enviado");
@@ -135,6 +145,11 @@ void enviarEmailCliente(MouseEvent event) throws IOException, MessagingException
     alert.showAndWait();
   }
 
+  /**
+   * Abre la pantalla de reseñas para el evento actual.
+   *
+   * @param event El evento de ratón que dispara el método.
+   */
   public void openReviewScreen(MouseEvent event) {
     if (evento != null) {
       try {
@@ -158,6 +173,14 @@ void enviarEmailCliente(MouseEvent event) throws IOException, MessagingException
     }
   }
 
+  /**
+   * Inicializa el controlador.
+   *
+   * @param location  La ubicación utilizada para resolver rutas relativas del
+   *                  objeto raíz, o null si no se conoce.
+   * @param resources Los recursos utilizados para localizar el objeto raíz, o
+   *                  null si no se conocen.
+   */
   public void initialize(URL location, ResourceBundle resources) {
     txtFecha.setEditable(false);
     txtUbicacion.setEditable(false);

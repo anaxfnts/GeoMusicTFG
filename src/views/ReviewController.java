@@ -39,13 +39,19 @@ public class ReviewController {
   // Conjunto para rastrear las reviews cargadas.
   private Set<String> loadedReviewIds = new HashSet<>();
 
-  // Método de inicialización que se llama automáticamente al cargar la interfaz.
+  /**
+   * Método de inicialización que se llama automáticamente al cargar la interfaz.
+   */
   public void initialize() {
     // Obtiene la instancia de Firestore.
     db = firebase.ConexionFirebase.getFirestore();
   }
 
-  // Método para cargar las reviews de un evento específico.
+  /**
+   * Método para cargar las reviews de un evento específico.
+   *
+   * @param eventIdRec El identificador del evento cuyas reviews se van a cargar.
+   */
   public void loadReviews(String eventIdRec) {
     eventId = eventIdRec;
     ApiFuture<QuerySnapshot> future = db.collection("Reviews").whereEqualTo("eventId", eventId).get();
@@ -74,7 +80,9 @@ public class ReviewController {
     });
   }
 
-  // Método para publicar una nueva review.
+  /**
+   * Método para publicar una nueva review.
+   */
   @FXML
   public void postReview() {
     DocumentReference docRef = db.collection("Reviews").document();
@@ -116,7 +124,9 @@ public class ReviewController {
     });
   }
 
-  // Método para mostrar una alerta de error.
+  /**
+   * Método para mostrar una alerta de error.
+   */
   public static void alertaError() {
     Alert errorAlert = new Alert(AlertType.ERROR);
     errorAlert.setTitle("Error");
@@ -125,7 +135,9 @@ public class ReviewController {
     errorAlert.showAndWait();
   }
 
-  // Método para mostrar una alerta informativa.
+  /**
+   * Método para mostrar una alerta informativa.
+   */
   public static void alertaInfo() {
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle("Review publicada");

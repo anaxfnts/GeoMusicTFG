@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -19,54 +20,56 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1038.0" prefWidth="1888.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.VerCuentaController">
-   <children>
-      <Pane layoutX="432.0" layoutY="171.0" prefHeight="524.0" prefWidth="512.0" style="-fx-background-color: black; -fx-background-radius: 40;">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0" prefWidth="1418.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.VerCuentaController">
+   <center>
+      <Pane prefHeight="578.0" prefWidth="1145.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="14.0" layoutY="154.0" text="Nombre" textFill="#d886ff">
+            <Label layoutX="452.0" layoutY="456.0" text="Ubicación" textFill="#d886ff">
                <font>
                   <Font name="Arial Black" size="15.0" />
-               </font></Label>
-            <Label ellipsisString="" layoutX="297.0" layoutY="231.0" text="Contraseña" textFill="#d886ff">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font></Label>
-            <JFXButton layoutX="354.0" layoutY="396.0" prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: #d886ff; -fx-background-radius: 40;" text="Editar">
+               </font>
+            </Label>
+            <JFXComboBox fx:id="ubicacion" layoutX="452.0" layoutY="479.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" />
+            <JFXTextField fx:id="txtNombreUser" focusColor="WHITE" layoutX="452.0" layoutY="318.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" unFocusColor="#ffffff00" />
+            <JFXButton fx:id="btnEditar" layoutX="813.0" layoutY="511.0" onMouseClicked="#editarCuenta" prefHeight="43.0" prefWidth="144.0" style="-fx-background-color: #d886ff; -fx-background-radius: 40;" text="Editar">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </JFXButton>
-            <JFXTextField fx:id="txtNombreUser" focusColor="WHITE" layoutX="14.0" layoutY="178.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" unFocusColor="#ffffff00" />
-            <JFXPasswordField fx:id="txtPassword" focusColor="WHITE" layoutX="297.0" layoutY="253.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" unFocusColor="#4d4d4d00" />
-            <Label layoutX="14.0" layoutY="230.0" text="Correo electrónico" textFill="#d886ff">
+            <Label layoutX="784.0" layoutY="295.0" text="Usuario" textFill="#d886ff">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="txtCorreo" focusColor="WHITE" layoutX="14.0" layoutY="253.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" unFocusColor="#ffffff00" />
-            <Label layoutX="14.0" layoutY="302.0" text="Ubicación" textFill="#d886ff">
+            <JFXTextField fx:id="txtUser" focusColor="WHITE" layoutX="784.0" layoutY="318.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" unFocusColor="#ffffff00" />
+            <Label layoutX="452.0" layoutY="372.0" text="Correo electrónico" textFill="#d886ff">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="ubicacion" layoutX="14.0" layoutY="325.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" />
-            <JFXTextField fx:id="txtUser" focusColor="WHITE" layoutX="297.0" layoutY="178.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" unFocusColor="#ffffff00" />
-            <Label layoutX="297.0" layoutY="154.0" text="Usuario" textFill="#d886ff">
+            <Label ellipsisString="" layoutX="784.0" layoutY="373.0" text="Contraseña" textFill="#d886ff">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="452.0" layoutY="295.0" text="Nombre" textFill="#d886ff">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Label>
+            <JFXTextField fx:id="txtCorreo" focusColor="WHITE" layoutX="452.0" layoutY="395.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" unFocusColor="#ffffff00" />
+            <JFXPasswordField fx:id="txtPassword" focusColor="WHITE" layoutX="784.0" layoutY="395.0" prefHeight="32.0" prefWidth="201.0" style="-fx-background-color: white;" unFocusColor="#4d4d4d00" />
+            <Label layoutX="213.0" layoutY="137.0" prefHeight="74.0" prefWidth="239.0" text="Ver cuenta" textFill="#d886ff">
+               <font>
+                  <Font name="Arial Black" size="37.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnAtras" layoutX="87.0" layoutY="115.0" onMouseClicked="#atras" prefHeight="119.0" prefWidth="126.0" text="←" textFill="#d886ff">
+               <font>
+                  <Font size="55.0" />
+               </font>
+            </JFXButton>
          </children>
       </Pane>
-      <Label layoutX="249.0" layoutY="84.0" prefHeight="74.0" prefWidth="301.0" text="Ver cuenta" textFill="#d886ff">
-         <font>
-            <Font name="Arial Black" size="37.0" />
-         </font>
-      </Label>
-      <JFXButton fx:id="btnAtras" layoutX="139.0" layoutY="61.0" onMouseClicked="#atras" prefHeight="119.0" prefWidth="126.0" text="←" textFill="#d886ff">
-         <font>
-            <Font size="55.0" />
-         </font>
-      </JFXButton>
-   </children>
-</AnchorPane>
+   </center>
+</BorderPane>

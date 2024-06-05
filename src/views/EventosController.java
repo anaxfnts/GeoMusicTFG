@@ -14,13 +14,22 @@ public class EventosController {
   @FXML
   private Pane paneEventos;
 
-  // Método para cambiar a la vista de eventos.
+  /**
+   * Maneja el evento de ratón para cambiar a la vista de eventos.
+   *
+   * @param event El evento de ratón que dispara el método.
+   * @throws IOException Si ocurre un error de E/S al cargar la vista.
+   */
   @FXML
   void vistaEventos(MouseEvent event) throws IOException {
     vistaVerEventos();
   }
 
-  // Método para cargar la vista de eventos.
+  /**
+   * Carga la vista de eventos y la establece en el centro del panel raíz.
+   *
+   * @throws IOException Si ocurre un error de E/S al cargar la vista.
+   */
   private void vistaVerEventos() throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
     AnchorPane root = loader.load();

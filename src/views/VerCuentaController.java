@@ -1,8 +1,11 @@
 package views;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -10,20 +13,24 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import firebase.CRUDFirebase;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.Cuenta;
 
-public class VerCuentaController {
+public class VerCuentaController implements Initializable {
 
+  @FXML
   private BorderPane borderPane;
-  // Referencia al escenario principal.
+
   private Stage stage;
 
   @FXML
@@ -33,7 +40,7 @@ public class VerCuentaController {
   private JFXButton btnAtras;
 
   @FXML
-  private JFXButton btnCancel;
+  private JFXButton btnEditar;
 
   @FXML
   private JFXComboBox<String> ubicacion;
@@ -50,20 +57,34 @@ public class VerCuentaController {
   @FXML
   private JFXPasswordField txtPassword;
 
-  @FXML
-  private JFXPasswordField txtPasswordComprobado;
+  private Cuenta cuenta;
 
-  public static Cuenta comprobar;
+  /**
+   * Método para establecer los datos de la cuenta.
+   * 
+   * @param cuentas La cuenta cuyos datos se van a mostrar.
+   * @throws FileNotFoundException Si no se encuentra el archivo con los datos de la cuenta.
+   */
+  public void setDatos(Cuenta cuentas) throws FileNotFoundException {
+    cuenta = cuentas;
+    txtNombreUser.setText(cuentas.getNombre());
+    txtUser.setText(cuentas.getUsuario());
+    txtCorreo.setText(cuentas.getCorreo());
+    txtPassword.setText(cuentas.getContrasenya());
+    ubicacion.setValue(cuentas.getUbicacion());
+  }
 
+  /**
+   * Método para agregar provincias al ComboBox.
+   */
   void agregarProvincias() {
-    // Lista de provincias de España
     List<String> provincias = new ArrayList<>();
-    provincias.add("Álava");
+    provincias.add("Alava");
     provincias.add("Albacete");
     provincias.add("Alicante");
     provincias.add("Almería");
     provincias.add("Asturias");
-    provincias.add("Ávila");
+    provincias.add("Avila");
     provincias.add("Badajoz");
     provincias.add("Barcelona");
     provincias.add("Burgos");
@@ -82,7 +103,7 @@ public class VerCuentaController {
     provincias.add("Huesca");
     provincias.add("Islas Baleares");
     provincias.add("Jaén");
-    provincias.add("La Coruña");
+    provincias.add("La Corunya");
     provincias.add("La Rioja");
     provincias.add("Las Palmas");
     provincias.add("León");
@@ -108,49 +129,140 @@ public class VerCuentaController {
     provincias.add("Vizcaya");
     provincias.add("Zamora");
     provincias.add("Zaragoza");
-
     ubicacion.getItems().clear();
-    // Agrega todas las provincias al ComboBox
     ubicacion.getItems().addAll(provincias);
   }
 
+  /**
+   * Maneja el evento de clic para volver atrás.
+   * 
+   * @param event El evento de clic del ratón.
+   * @throws IOException Si ocurre un error al cargar la vista.
+   */
   @FXML
   void atras(MouseEvent event) throws IOException {
     String usuario = LoginController.mostrarNombreUsuario();
-    comprobar = CRUDFirebase.obtenerDatosCuenta(usuario);
+    cuenta = CRUDFirebase.obtenerDatosCuenta(usuario);
+
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PrincipalView.fxml"));
-    borderPane = loader.load();
+    BorderPane newBorderPane = loader.load(); // Cargar el nuevo BorderPane
     PrincipalController control = loader.getController();
-    Scene escena = new Scene(borderPane);
-    Stage stage = new Stage();
-    stage.setScene(escena);
-    control.initVerCuenta(stage, this, comprobar.getNombre(), borderPane, comprobar.getTipo());
-    stage.show();
-  
+    Scene escena = new Scene(newBorderPane); // Crear una nueva escena con el nuevo BorderPane
+    Stage newStage = new Stage();
+    newStage.initStyle(StageStyle.UNDECORATED); // Aquí se quita la barra de título
+    newStage.setScene(escena);
+    control.initVerCuenta(newStage, this, cuenta.getNombre(), newBorderPane, cuenta.getTipo());
+    newStage.show();
     if (this.stage != null) {
       this.stage.close();
     }
   }
 
+  /**
+   * Carga y muestra la escena de eventos.
+   * 
+   * @throws IOException Si ocurre un error al cargar la vista.
+   */
   public void escenaEventos() throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/VerEventos.fxml"));
-    AnchorPane eventosView = loader.load(); // Cargamos el AnchorPane de eventos
-
+    AnchorPane eventosView = loader.load();
     VerEventosController verEventosController = loader.getController();
-
-    // Asegúrate de que `borderPane` esté inicializado y sea la raíz de la escena
-    // actual
-    if (borderPane == null) {
-      throw new IllegalStateException("borderPane no está inicializado.");
-    }
-
     borderPane.setCenter(eventosView);
   }
 
-  // Maneja el evento de clic para ver eventos.
+  /**
+   * Maneja el evento de clic para ver la vista de eventos.
+   * 
+   * @param event El evento de clic del ratón.
+   * @throws IOException Si ocurre un error al cargar la vista.
+   */
   @FXML
   void vistaEventos(MouseEvent event) throws IOException {
     escenaEventos();
     borderPane.setLeft(null);
+  }
+
+  /**
+   * Maneja el evento de clic para editar la cuenta.
+   * 
+   * @param event El evento de clic del ratón.
+   * @throws IOException Si ocurre un error al cargar la vista.
+   */
+  @FXML
+  void editarCuenta(MouseEvent event) throws IOException {
+    escenaEditarCuenta();
+  }
+
+  /**
+   * Muestra la escena para editar la cuenta.
+   * 
+   * @throws IOException Si ocurre un error al cargar la vista.
+   */
+  private void escenaEditarCuenta() throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/EditarCuentaView.fxml"));
+    BorderPane editarCuentaView = loader.load();
+    EditarCuentaController editarCuentaController = loader.getController();
+    
+    // Crear una nueva escena con la vista cargada
+    Scene nuevaEscena = new Scene(editarCuentaView);
+
+    // Crear un nuevo Stage y configurar su escena
+    Stage nuevoStage = new Stage();
+    nuevoStage.initStyle(StageStyle.UNDECORATED); // Aquí se quita la barra de título
+    nuevoStage.setScene(nuevaEscena);
+    nuevoStage.setMaximized(true);
+    nuevoStage.setResizable(false);
+    nuevoStage.setTitle("GeoMusic");
+    nuevoStage.getIcons().add(new Image("images/logo.PNG"));
+
+    // Mostrar el nuevo Stage
+    nuevoStage.show();
+  }
+
+  /**
+   * Inicializa el controlador. Este método se llama automáticamente
+   * después de cargar el archivo FXML.
+   * 
+   * @param location La ubicación utilizada para resolver rutas relativas para el objeto raíz, o null si la ubicación no se conoce.
+   * @param resources Los recursos utilizados para localizar el objeto raíz, o null si no se han localizado recursos.
+   */
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    txtNombreUser.setEditable(false);
+    txtUser.setEditable(false);
+    txtCorreo.setEditable(false);
+    txtPassword.setEditable(false);
+    ubicacion.setEditable(false);
+
+    // Llama al método para agregar provincias al ComboBox.
+    agregarProvincias();
+
+    // Cargar datos de la cuenta del usuario.
+    try {
+      cuenta = CRUDFirebase.obtenerDatosCuenta(LoginController.mostrarNombreUsuario());
+      if (cuenta != null) {
+        setDatos(cuenta);
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Establece el Stage del controlador.
+   * 
+   * @param stage El Stage que se va a establecer.
+   */
+  public void setStage(Stage stage) {
+    this.stage = stage;
+  }
+
+  /**
+   * Establece el BorderPane del controlador.
+   * 
+   * @param borderPane El BorderPane que se va a establecer.
+   */
+  public void setBorderPane(BorderPane borderPane) {
+    this.borderPane = borderPane;
   }
 }

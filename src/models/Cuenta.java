@@ -14,28 +14,28 @@ public class Cuenta extends RecursiveTreeObject<Cuenta> {
   StringProperty idCuenta;
   StringProperty nombre;
   StringProperty usuario;
-  StringProperty contraseña;
+  StringProperty contrasenya;
   StringProperty ubicacion;
   StringProperty correo;
   StringProperty tipo;
   BooleanProperty es_administrador;
 
-  public Cuenta(String idCuenta, String nombre, String usuario, String contraseña, String ubicacion, String correo,
+  public Cuenta(String idCuenta, String nombre, String usuario, String contrasenya, String ubicacion, String correo,
       String tipo, boolean es_administrador) {
     this.idCuenta = new SimpleStringProperty(idCuenta);
     this.nombre = new SimpleStringProperty(nombre);
     this.usuario = new SimpleStringProperty(usuario);
-    this.contraseña = new SimpleStringProperty(contraseña);
+    this.contrasenya = new SimpleStringProperty(contrasenya);
     this.ubicacion = new SimpleStringProperty(ubicacion);
     this.correo = new SimpleStringProperty(correo);
     this.tipo = new SimpleStringProperty(tipo);
     this.es_administrador = new SimpleBooleanProperty(es_administrador);
   }
 
-  public Cuenta(String nombre, String usuario, String contraseña, String ubicacion, String correo, String tipo) {
+  public Cuenta(String nombre, String usuario, String contrasenya, String ubicacion, String correo, String tipo) {
     this.nombre = new SimpleStringProperty(nombre);
     this.usuario = new SimpleStringProperty(usuario);
-    this.contraseña = new SimpleStringProperty(contraseña);
+    this.contrasenya = new SimpleStringProperty(contrasenya);
     this.ubicacion = new SimpleStringProperty(ubicacion);
     this.correo = new SimpleStringProperty(correo);
     this.tipo = new SimpleStringProperty(tipo);
@@ -65,12 +65,12 @@ public class Cuenta extends RecursiveTreeObject<Cuenta> {
     this.usuario = new SimpleStringProperty(usuario);
   }
 
-  public String getContraseña() {
-    return contraseña.get();
+  public String getContrasenya() {
+    return contrasenya.get();
   }
 
-  public void setContraseña(String contraseña) {
-    this.contraseña = new SimpleStringProperty(contraseña);
+  public void setContrasenya(String contrasenya) {
+    this.contrasenya = new SimpleStringProperty(contrasenya);
   }
 
   public String getUbicacion() {
@@ -111,7 +111,7 @@ public class Cuenta extends RecursiveTreeObject<Cuenta> {
 
   @Override
   public String toString() {
-    return "Cuenta [nombre=" + nombre + ", usuario=" + usuario + ", contraseña=" + contraseña + ", ubicacion="
+    return "Cuenta [nombre=" + nombre + ", usuario=" + usuario + ", contrasenya=" + contrasenya + ", ubicacion="
         + ubicacion + ", correo=" + correo + ", tipo=" + tipo + "]";
   }
 

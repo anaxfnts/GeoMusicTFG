@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
   @FXML
   private JFXButton btnAtras;
 
-  // Campo de contraseña.
+  // Campo de contrasenya.
   @FXML
   private JFXPasswordField txtPassword;
 
@@ -57,16 +57,21 @@ public class LoginController implements Initializable {
   @FXML
   private Label txtTipo;
 
-  // Variable para comprobar la cuenta.
+  // Variable para cuenta la cuenta.
   public static Cuenta comprobar;
 
   // Variable para almacenar el correo del usuario logueado.
   public static String loggedInUserMail = ""; 
 
-  // Método que realiza y comprueba el login de la cuenta.
+  /**
+   * Realiza y comprueba el login de la cuenta.
+   *
+   * @param event El evento de ratón que dispara el método.
+   * @throws IOException Si ocurre un error de E/S al cargar la vista.
+   * @throws Exception Si ocurre algún otro error durante el login.
+   */
   @FXML
   void logeo(MouseEvent event) throws IOException, Exception {
-
     String usuario = txtUser.getText();
     String passwd = txtPassword.getText();
     boolean registrado;
@@ -106,10 +111,14 @@ public class LoginController implements Initializable {
     } catch (NullPointerException e) {
       alertaError();
     }
-
   }
 
-  // Método para volver a la pantalla previa de la aplicación.
+  /**
+   * Vuelve a la pantalla previa de la aplicación.
+   *
+   * @param event El evento de ratón que dispara el método.
+   * @throws IOException Si ocurre un error de E/S al cargar la vista.
+   */
   @FXML
   void atras(MouseEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PreviaView.fxml"));
@@ -125,21 +134,29 @@ public class LoginController implements Initializable {
     }
   }
 
-  // Método para salir de la aplicación.
+  /**
+   * Sale de la aplicación.
+   *
+   * @param event El evento de ratón que dispara el método.
+   */
   @FXML
   void salir(MouseEvent event) {
     Platform.exit();
   }
 
-  // Método que muestra la alerta de error.
+  /**
+   * Muestra una alerta de error cuando el usuario no existe.
+   */
   public static void alertaError() {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
-    alert.setContentText("Usuario no existe: comprueba tu usuario y tu contraseña.");
+    alert.setContentText("Usuario no existe: comprueba tu usuario y tu contrasenya.");
     alert.showAndWait();
   }
 
-  // Método que muestra la alerta de error en la aplicación.
+  /**
+   * Muestra una alerta de error cuando la aplicación no está disponible.
+   */
   public static void alertaFalloApp() {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
@@ -147,7 +164,9 @@ public class LoginController implements Initializable {
     alert.showAndWait();
   }
 
-  // Método que muestra la alerta de campos vacíos.
+  /**
+   * Muestra una alerta de campos vacíos.
+   */
   public static void alertaVacio() {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Error");
@@ -155,27 +174,43 @@ public class LoginController implements Initializable {
     alert.showAndWait();
   }
 
-  // Método que muestra la ubicación predeterminada.
+  /**
+   * Muestra la ubicación predeterminada del usuario.
+   *
+   * @return La ubicación predeterminada del usuario.
+   */
   public static String mostrarUbicacionPredeteminada() {
     String ubicacionPredeterminada = CRUDFirebase.consultarUbicacion(comprobar.getUsuario());
     return ubicacionPredeterminada;
   }
-  
-//Método que muestra la ubicación predeterminada.
- public static String mostrarNombreUsuario() {
-   String usuario = CRUDFirebase.consultarUsuario(comprobar.getUsuario());
-   return usuario;
- }
 
-  // Establece el escenario principal.
+  /**
+   * Muestra el nombre del usuario.
+   *
+   * @return El nombre del usuario.
+   */
+  public static String mostrarNombreUsuario() {
+    String usuario = CRUDFirebase.consultarUsuario(comprobar.getUsuario());
+    return usuario;
+  }
+
+  /**
+   * Establece el escenario principal.
+   *
+   * @param primaryStage El escenario principal de la aplicación.
+   */
   public void setStage(Stage primaryStage) {
     stage = primaryStage;
   }
 
-  // Inicializa el controlador.
+  /**
+   * Inicializa el controlador.
+   *
+   * @param location La ubicación utilizada para resolver rutas relativas para el objeto raíz o nulo si la ubicación no es conocida.
+   * @param resources Los recursos utilizados para localizar el objeto raíz o nulo si los recursos no son conocidos.
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    // Inicialización necesaria
   }
-
 }

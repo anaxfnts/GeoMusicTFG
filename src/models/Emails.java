@@ -23,7 +23,7 @@ public class Emails {
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
 		
-		//Indicamos el usuario y contraseña desde donde se envian los emails
+		//Indicamos el usuario y contrasenya desde donde se envian los emails
 		props.put("from", "geomusic95@gmail.com");
 		props.put("username", "geomusic95@gmail.com");
 		props.put("password", "kmsm cdap lftl ntcp");

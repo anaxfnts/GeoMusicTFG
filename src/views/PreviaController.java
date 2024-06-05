@@ -49,7 +49,12 @@ public class PreviaController {
   @FXML
   private ImageView twitter;
 
-  // Maneja el evento de clic para iniciar sesión.
+  /**
+   * Maneja el evento de clic para iniciar sesión.
+   *
+   * @param event El evento de ratón que dispara el método.
+   * @throws IOException Si ocurre un error de E/S al cargar la vista.
+   */
   @FXML
   void logeo(MouseEvent event) throws IOException {
     FXMLLoader loade = new FXMLLoader(getClass().getResource("/views/LoginView.fxml"));
@@ -63,7 +68,12 @@ public class PreviaController {
     }
   }
 
-  // Maneja el evento de clic para crear cuenta.
+  /**
+   * Maneja el evento de clic para crear cuenta.
+   *
+   * @param event El evento de ratón que dispara el método.
+   * @throws IOException Si ocurre un error de E/S al cargar la vista.
+   */
   @FXML
   void crearCuenta(MouseEvent event) throws IOException {
     FXMLLoader loade = new FXMLLoader(getClass().getResource("/views/CrearCuentaView.fxml"));
@@ -77,13 +87,21 @@ public class PreviaController {
     }
   }
 
-  // Método para salir de la aplicación.
+  /**
+   * Sale de la aplicación.
+   *
+   * @param event El evento de ratón que dispara el método.
+   */
   @FXML
   void salir(MouseEvent event) {
     Platform.exit();
   }
 
-  // Método para abrir la web de Facebook.
+  /**
+   * Método para abrir la web de Facebook.
+   *
+   * @param event El evento de ratón que dispara el método.
+   */
   @FXML
   void webFacebook(MouseEvent event) {
     URL url = null;
@@ -99,7 +117,11 @@ public class PreviaController {
     }
   }
 
-  // Método para abrir la web de Instagram.
+  /**
+   * Método para abrir la web de Instagram.
+   *
+   * @param event El evento de ratón que dispara el método.
+   */
   @FXML
   void webInstagram(MouseEvent event) {
     URL url = null;
@@ -115,7 +137,11 @@ public class PreviaController {
     }
   }
 
-  // Método para abrir la web de Twitter.
+  /**
+   * Método para abrir la web de Twitter.
+   *
+   * @param event El evento de ratón que dispara el método.
+   */
   @FXML
   void webTwitter(MouseEvent event) {
     URL url = null;
@@ -131,7 +157,9 @@ public class PreviaController {
     }
   }
 
-  // Método que muestra una alerta de error.
+  /**
+   * Muestra una alerta de error.
+   */
   public static void alertaError() {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
@@ -139,7 +167,11 @@ public class PreviaController {
     alert.showAndWait();
   }
 
-  // Establece el escenario principal.
+  /**
+   * Establece el escenario principal.
+   *
+   * @param primaryStage El escenario principal de la aplicación.
+   */
   public void setStage(Stage primaryStage) {
     stage = primaryStage;
   }

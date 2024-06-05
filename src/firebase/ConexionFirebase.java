@@ -1,17 +1,25 @@
 package firebase;
 
 import java.io.IOException;
-
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
+/**
+ * Clase para gestionar la conexión con Firebase. Permite inicializar y obtener
+ * una instancia de Firestore.
+ */
 public class ConexionFirebase {
-  
+
   private static Firestore firestore;
 
+  /**
+   * Inicializa la conexión con Firebase y configura Firestore.
+   *
+   * @return una instancia de Firestore.
+   */
   public static Firestore iniciarFirebase() {
     try {
       // Cargar el archivo de configuración desde el classpath
@@ -37,6 +45,11 @@ public class ConexionFirebase {
     return firestore;
   }
 
+  /**
+   * Obtiene la instancia de Firestore. Si no está inicializada, la inicializa.
+   *
+   * @return la instancia de Firestore.
+   */
   public static Firestore getFirestore() {
     if (firestore == null) {
       // Si la instancia de Firestore aún no está inicializada, inicialízala

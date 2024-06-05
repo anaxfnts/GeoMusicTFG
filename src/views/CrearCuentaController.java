@@ -36,7 +36,6 @@ public class CrearCuentaController implements Initializable {
   public static BorderPane root;
   private Stage stage;
 
-  // Todos los elementos del Login
   @FXML
   private JFXTextField txtNombreUser;
 
@@ -64,15 +63,17 @@ public class CrearCuentaController implements Initializable {
   @FXML
   private JFXPasswordField txtPasswordComprobado;
 
+  /**
+   * Agrega una lista de provincias de España al ComboBox de ubicaciones.
+   */
   void agregarProvincias() {
-    // Lista de provincias de España
     List<String> provincias = new ArrayList<>();
-    provincias.add("Álava");
+    provincias.add("Alava");
     provincias.add("Albacete");
     provincias.add("Alicante");
     provincias.add("Almería");
     provincias.add("Asturias");
-    provincias.add("Ávila");
+    provincias.add("Avila");
     provincias.add("Badajoz");
     provincias.add("Barcelona");
     provincias.add("Burgos");
@@ -91,7 +92,7 @@ public class CrearCuentaController implements Initializable {
     provincias.add("Huesca");
     provincias.add("Islas Baleares");
     provincias.add("Jaén");
-    provincias.add("La Coruña");
+    provincias.add("La Corunya");
     provincias.add("La Rioja");
     provincias.add("Las Palmas");
     provincias.add("León");
@@ -119,42 +120,42 @@ public class CrearCuentaController implements Initializable {
     provincias.add("Zaragoza");
 
     ubicacion.getItems().clear();
-
-    // Agrega todas las provincias al ComboBox
     ubicacion.getItems().addAll(provincias);
   }
 
+  /**
+   * Crea una cuenta nueva y la guarda en Firestore.
+   *
+   * @param event El evento de ratón que dispara el método.
+   * @throws IOException          Si ocurre un error de E/S.
+   * @throws InterruptedException Si ocurre una interrupción durante la operación.
+   * @throws ExecutionException   Si ocurre un error en la ejecución.
+   */
   @FXML
   void crearCuenta(MouseEvent event) throws IOException, InterruptedException, ExecutionException {
-
     String usuario = txtUser.getText();
     String usuarioConsultado = CRUDFirebase.consultarUsuario(usuario);
     String contrasenyaHash = HashPassword.convertirSHA256(txtPassword.getText());
+
     if (usuario.isEmpty()) {
       alertaVacio();
     } else if (!txtPassword.getText().equals(txtPasswordComprobado.getText())) {
       alertaNoCoinciden();
     } else {
-
       if (usuarioConsultado.equalsIgnoreCase(usuario)) {
         Firestore firestore = ConexionFirebase.getFirestore();
-
-        // Establece el ID del documento como el nombre de usuario
         DocumentReference docRef = firestore.collection("Cuentas").document(usuario);
 
-        // Crea un objeto Cuenta con los datos proporcionados
         Cuenta cuenta = new Cuenta(usuario, txtNombreUser.getText(), txtUser.getText().trim(), contrasenyaHash,
             ubicacion.getValue(), txtCorreo.getText().trim(), "Normal", false);
 
-        // Guarda el objeto Cuenta en Firestore
         @SuppressWarnings("unused")
         WriteResult writeResult = docRef.set(cuenta).get();
 
-        System.out.println("Cuenta añadida con ID: " + usuario);
+        System.out.println("Cuenta anyadida con ID: " + usuario);
 
         alertaCuentaCreada();
 
-        // Abre la ventana PrincipalView.fxml
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PreviaView.fxml"));
         AnchorPane root = loader.load();
         Scene escena = new Scene(root);
@@ -171,6 +172,12 @@ public class CrearCuentaController implements Initializable {
     }
   }
 
+  /**
+   * Regresa a la vista anterior.
+   *
+   * @param event El evento de ratón que dispara el método.
+   * @throws IOException Si ocurre un error de E/S.
+   */
   @FXML
   void atras(MouseEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PreviaView.fxml"));
@@ -187,59 +194,77 @@ public class CrearCuentaController implements Initializable {
     }
   }
 
-  // Metodo para salir de la aplicacion
+  /**
+   * Sale de la aplicación.
+   *
+   * @param event El evento de ratón que dispara el método.
+   */
   @FXML
   void salir(MouseEvent event) {
     Platform.exit();
   }
 
-  // Metodo que muestra la alerta de error
+  /**
+   * Muestra una alerta de error.
+   */
   public static void alertaError() {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle("Error");
     alert.setContentText("Usuario incorrecto");
     alert.showAndWait();
-
   }
 
-//Metodo que muestra la alerta de null
+  /**
+   * Muestra una alerta indicando que hay campos vacíos.
+   */
   public static void alertaVacio() {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Error");
     alert.setContentText("Campos vacíos");
     alert.showAndWait();
-
   }
 
-//Metodo que muestra la alerta de null
+  /**
+   * Muestra una alerta indicando que las contraseñas no coinciden.
+   */
   public static void alertaNoCoinciden() {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Error");
-    alert.setContentText("Las contraseñas no coinciden");
+    alert.setContentText("Las contrasenyas no coinciden");
     alert.showAndWait();
-
   }
 
-//Metodo que muestra que se ha creado la cuenta
+  /**
+   * Muestra una alerta indicando que la cuenta ha sido creada.
+   */
   public static void alertaCuentaCreada() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Cuenta creada");
     alert.setContentText("A continuación vas a iniciar sesión");
     alert.showAndWait();
-
   }
 
+  /**
+   * Establece la instancia de Stage para el controlador.
+   *
+   * @param primaryStage La instancia de Stage principal.
+   */
   public void setStage(Stage primaryStage) {
     stage = primaryStage;
-
   }
 
+  /**
+   * Inicializa el controlador.
+   *
+   * @param location  La ubicación utilizada para resolver rutas relativas del
+   *                  objeto raíz, o null si no se conoce.
+   * @param resources Los recursos utilizados para localizar el objeto raíz, o
+   *                  null si no se conocen.
+   */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // Agregar todas las provincias al ComboBox cuando se despliegue
     ubicacion.showingProperty().addListener((obs, oldValue, newValue) -> {
       if (newValue) {
-        // Cuando se muestra el ComboBox, agregar todas las provincias
         agregarProvincias();
       }
     });
